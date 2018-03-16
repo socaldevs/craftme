@@ -3,12 +3,11 @@ const sequelize = require('./index.js');
 
 // Schema
 const User = sequelize.define('user', {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING,
+  username: { type: Sequelize.STRING, unique: true },
   type: Sequelize.INTEGER,
   bio: Sequelize.STRING,
   profile_pic_url: Sequelize.STRING,
-  crafts: Sequelize.ARRAY(Sequelize.TEXT),
+  crafts: Sequelize.ARRAY(Sequelize.STRING),
   rating: Sequelize.INTEGER
 });
 
@@ -27,12 +26,12 @@ const Feedback = sequelize.define('feedback', {
 });
 
 const Booking = sequelize.define('booking', {
-  timeslot: Sequelize.ARRAY(Sequelize.TEXT)
+  timeslot: Sequelize.ARRAY(Sequelize.STRING)
 });
 
 // Associations
-Message.belongsTo(User, { foreignKey: 'teacher_id' });
-Message.belongsTo(User, { foreignKey: 'student_id' });
+Message.belongsTo(User, { foreignKey: 'sender_id' });
+Message.belongsTo(User, { foreignKey: 'recipient_id' });
 Message.belongsTo(Message, { foreignKey: 'parent_id' });
 Lesson.belongsTo(User, { foreignKey: 'teacher_id' });
 Lesson.belongsTo(User, { foreignKey: 'student_id' });

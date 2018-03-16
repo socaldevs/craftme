@@ -1,19 +1,23 @@
 const db = require('../../db/schema.js');
 
 module.exports = {
-  requestBooking: async (req, res) => {
+  submitBooking: async (req, res) => {
     try {
-      //get teacher_id & student_id is obtained from req.body
-      let id = req.body.id;
-      //insert into bookings table
-      let booking = Booking.create({});
-      //timeslot will also be from req.body
-      //confirmed = 0 initially
+      let { student_id, teacher_id, timeslot } = req.body;
+      let booking = await Booking.create({
+        student_id: student_id,
+        teacher_id: teacher_id,
+        timeslot: timeslot //NEEDS TO BE AN ARRAY
+      });
+      res.send(booking);
     } catch (error) {
       console.log(error);
       return;
     }
   },
+
+  //TODO: determine if these functions are needed
+
   // respondBooking: (req, res) => {
   //   //get teacher_id & student_id & timeslot from req.body
   //   //query bookings table where timeslot, teacher_id & student id are the same
@@ -24,6 +28,7 @@ module.exports = {
   //   //query bookings table with above info
   //   //findanddelete the entry from the table
   // },
+
   submitAvailability: (req, res) => {
     //get all information from req.body
     //confirmed = 0

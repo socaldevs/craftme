@@ -3,14 +3,27 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 module.exports = {
-  saveLesson: (req, res) => {
-    //insert into lessons table
-    //where teacher_id & student id is obtained from req.body
+  //TODO: think about incorporating inner joins here
+  saveLesson: async (req, res) => {
+    try {
+      let { teacher_id, student_id, chat_id, notes } = req.body;
+      let lesson = await db.Lesson.create({
+        teacher_id: teacher_id,
+        student_id: student_id,
+        chat_id: chat_id,
+        notes: notes
+      });
+      res.send(lesson);
+    } catch (error) {
+      console.log('Error with saveLesson', error);
+      return;
+    }
   },
+
   fetchAllLessons: async (req, res) => {
     try {
       let id = req.params.id; //contingent upon passing
-      let data = await db.Lesson.findAll({
+      let allLessons = await db.Lesson.findAll({
         where: {
           [Op.or]: [
             {
@@ -22,35 +35,33 @@ module.exports = {
           ]
         }
       });
-      res.send(data);
+      res.send(allLessons);
     } catch (error) {
-      console.log(error);
+      console.log('Error with fetchAllLessons', error);
       return;
     }
-    //query lessons table
-    //get username somehow
-    //search for results where user_id = teacher/student id
-    //save results in data
-    //res.send(data) to front end
   },
-  fetchFeaturedLessons: (req, res) => {
+
+  //TODO: returns the FEATURED crafts, needs to
+  fetchFeaturedCrafts: (req, res) => {
     //possible MVP+
   },
-  fetchAllTeachersForLesson: async (req, res) => {
+
+  fetchAllTeachersForCraft: async (req, res) => {
     try {
-      let lesson = req.params.craft;
-      let data = await db.User.findAll({
+      let { craft } = req.params;
+      let teachers = await db.User.findAll({
         where: {
-          crafts: lesson
+          crafts: {
+            [Op.contains]: [craft]
+          },
+          [Op.and]: [{ type: 2 }]
         }
       });
-      res.send(data);
+      res.send(teachers);
     } catch (error) {
       console.log(error);
       return;
     }
   }
-  //query users table
-  //res.send all users where type = teacher and language/craft/lesson matches req.params
-  //get lesson/language/craft from req.params
 };

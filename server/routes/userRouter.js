@@ -6,18 +6,30 @@ const feedbackController = require('../controllers/feedbackController.js');
 const messageController = require('../controllers/messageController.js');
 const router = require('express').Router();
 
+//saves lesson after it has ended
 router.route('/saveLesson').post(lessonsController.saveLesson);
 
-router.route('/lessons/:id').get(lessonsController.fetchAllLessons);
+//loads upcoming lessons and past lessons
+router.route('/fetchAllLessons/:id').get(lessonsController.fetchAllLessons);
 
-router.route('/profile').get(userController.fetchUserInfo);
-
-router.route('/messages').get(messageController.fetchAllMessages);
-
-router.route('/messages/sendMessage').post(messageController.sendMessage);
-
+//adds a new user to the database
 router.route('/addTeacherOrStudent').post(userController.addTeacherOrStudent);
 
-router.route('/fetchUserInfo').get(userController.fetchUserInfo);
+//gets a user's profile/info
+router.route('/fetchUserInfo/:id').get(userController.fetchUserInfo);
+
+//updates a user's profile/info
+router.route('/updateUserInfo').put(userController.updateUserInfo);
+
+//get all messages that a user has sent or retrieved, needs some fine tuning
+router
+  .route('/messages/fetchAllMessages/:id')
+  .get(messageController.fetchAllMessages);
+
+//start a conversation
+router.route('/messages/sendMessage').post(messageController.sendMessage);
+
+//continues a conversation
+router.route('/messages/replyMessage').post(messageController.replyMessage);
 
 module.exports = router;

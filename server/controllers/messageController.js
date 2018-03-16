@@ -1,17 +1,51 @@
 const db = require('../../db/schema.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
-  fetchAllMessages: (req, res) => {
-    //get user id from req.params
-    //query messages table where recipient =
-    //res.send data
+  //TODO: ask team about fetchAllMessages
+  fetchAllMessages: async (req, res) => {
+    try {
+      let { id } = req.params;
+      let messages = await db.Message.findAll({
+        where: {
+          [Op.or]: [{ recipient_id: id }, { sender_id: id }]
+        }
+      });
+      res.send(messages);
+    } catch (error) {
+      console.log('Error with fetchAllMessages', error);
+      return;
+    }
   },
-  sendMessage: (req, res) => {
-    //get info from req.body
-    //insert into messages table where parentId = null
+  sendMessage: async (req, res) => {
+    try {
+      let { recipient_id, sender_id, text } = req.body;
+      let message = await db.Message.create({
+        recipient_id: recipient_id,
+        sender_id: sender_id,
+        text: text,
+        parent_id: null
+      });
+      res.send(message);
+    } catch (error) {
+      console.log('Error with sendMessage', error);
+      return;
+    }
   },
-  replyMessage: (req, res) => {
-    //get info from req.body
-    //insert into messages table where parentId = original message Id
+  replyMessage: async (req, res) => {
+    try {
+      let { recipient_id, sender_id, text, parent_id } = req.body;
+      let message = await db.Message.create({
+        recipient_id: recipient_id,
+        sender_id: sender_id,
+        text: text,
+        parent_id: parent_id
+      });
+      res.send(message);
+    } catch (error) {
+      console.log('Error with replyMessage', error);
+      return;
+    }
   }
 };

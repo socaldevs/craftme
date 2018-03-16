@@ -7,10 +7,15 @@ const messageController = require('../controllers/messageController.js');
 
 const router = express.Router();
 
-router.route('/book').post(bookingController.requestBooking);
+//submit a booking for a certain appointment
+router.route('/submitBooking').post(bookingController.submitBooking);
 
-router.route('/feedback').post(feedbackController.submitFeedback);
+//submit feedback after a lesson
+router.route('/submitFeedback').post(feedbackController.submitFeedback);
 
-router.route('/:craft').get(lessonsController.fetchAllTeachersForLesson);
+//get all teachers for a certain craft
+router
+  .route('/fetchAllTeachersForCraft/:craft')
+  .get(lessonsController.fetchAllTeachersForCraft);
 
 module.exports = router;
