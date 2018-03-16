@@ -4,7 +4,7 @@ module.exports = {
   submitBooking: async (req, res) => {
     try {
       let { student_id, teacher_id, timeslot } = req.body;
-      let booking = await Booking.create({
+      let booking = await db.Booking.create({
         student_id: student_id,
         teacher_id: teacher_id,
         timeslot: timeslot //NEEDS TO BE AN ARRAY
