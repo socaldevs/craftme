@@ -10,5 +10,9 @@ module.exports = {
   addTeacherOrStudent: (req, res) => {
     //get user info from req.body
     //insert into users table
+  },
+  updateUserInfo: (req, res) => {
+    //get user id and info from req.body
+    //update user table
   }
 };

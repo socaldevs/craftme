@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
   type: Sequelize.INTEGER,
   bio: Sequelize.STRING,
   profile_pic_url: Sequelize.STRING,
-  languages: Sequelize.ARRAY(Sequelize.TEXT),
+  crafts: Sequelize.ARRAY(Sequelize.TEXT),
   rating: Sequelize.INTEGER
 });
 
@@ -27,8 +27,7 @@ const Feedback = sequelize.define('feedback', {
 });
 
 const Booking = sequelize.define('booking', {
-  timeslot: Sequelize.ARRAY(Sequelize.TEXT),
-  confirmed: Sequelize.BOOLEAN
+  timeslot: Sequelize.ARRAY(Sequelize.TEXT)
 });
 
 // Associations

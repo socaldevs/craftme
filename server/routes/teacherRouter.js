@@ -7,8 +7,6 @@ const messageController = require('../controllers/messageController.js');
 
 const router = require('express').Router();
 
-router.route('/addTeacher').post(userController.addTeacherOrStudent);
-
 router.route('/submitAvailability').post(bookingController.submitAvailability);
 
 module.exports = router;

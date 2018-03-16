@@ -8,12 +8,16 @@ const router = require('express').Router();
 
 router.route('/saveLesson').post(lessonsController.saveLesson);
 
-router.route('/lessons').get(lessonsController.fetchAllLessons);
+router.route('/lessons/:id').get(lessonsController.fetchAllLessons);
 
 router.route('/profile').get(userController.fetchUserInfo);
 
 router.route('/messages').get(messageController.fetchAllMessages);
 
 router.route('/messages/sendMessage').post(messageController.sendMessage);
+
+router.route('/addTeacherOrStudent').post(userController.addTeacherOrStudent);
+
+router.route('/fetchUserInfo').get(userController.fetchUserInfo);
 
 module.exports = router;
