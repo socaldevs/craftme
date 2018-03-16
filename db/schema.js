@@ -34,6 +34,7 @@ const Booking = sequelize.define('booking', {
 // Associations
 Message.belongsTo(User, { foreignKey: 'teacher_id' });
 Message.belongsTo(User, { foreignKey: 'student_id' });
+Message.belongsTo(Message, { foreignKey: 'parent_id' });
 Lesson.belongsTo(User, { foreignKey: 'teacher_id' });
 Lesson.belongsTo(User, { foreignKey: 'student_id' });
 Feedback.belongsTo(User, { foreignKey: 'teacher_id' });
@@ -43,4 +44,3 @@ Booking.belongsTo(User, { foreignKey: 'teacher_id' });
 Booking.belongsTo(User, { foreignKey: 'student_id' });
 
 module.exports = { User, Message, Lesson, Feedback, Booking };
-
