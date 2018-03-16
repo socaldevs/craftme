@@ -15,6 +15,8 @@ app.use(morgan('short'));
 
 app.use(router);
 
+//app.use(express.static(path.join(__dirname, '/../client/dist')));
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
 sequelize.sync().then(() => {
