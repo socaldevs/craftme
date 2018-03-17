@@ -4,6 +4,7 @@ const sequelize = require('./index.js');
 // Schema
 const User = sequelize.define('user', {
   username: { type: Sequelize.STRING, unique: true },
+  password: Sequelize.STRING,
   type: Sequelize.INTEGER,
   bio: Sequelize.STRING,
   profile_pic_url: Sequelize.STRING,
