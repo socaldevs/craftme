@@ -11,8 +11,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('short'));
 
-// app.get('/', res.send('Hello world!'));
-
 app.use(router);
 
 //app.use(express.static(path.join(__dirname, '/../client/dist')));

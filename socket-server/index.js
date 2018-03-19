@@ -1,7 +1,7 @@
 const express = require('express');
 const socket = require('socket.io');
 
-const router = require('./routes');
+const { router } = require('./routes');
 const db = require('./db');
 
 const app = express();
@@ -9,6 +9,7 @@ const server = app.listen(3001, console.log('listening to PORT 3001'));
 const io = socket(server); 
 // web socket connection UPGRADES the http connection
 // io is the upgraded http server
+
 io.on('connection', (socket) => {
   // 'socket' var represents specific client connection
   console.log('made socket connection!', socket.id);
@@ -19,16 +20,27 @@ io.on('connection', (socket) => {
   });
 
   // handlers for that particular client only
+  // socket.on('chat', (data) => {
+  //   io.sockets.emit('chat', data);
+  // });
+
   socket.on('chat', (data) => {
-    io.sockets.emit('chat', data);
+    io.sockets.in(data.room).emit('chat', data);
   });
+
+  // socket.on('typing', (data) => {
+  //   socket.broadcast.emit('typing', data.feedback);
+  // });
 
   socket.on('typing', (data) => {
-    socket.broadcast.emit('typing', data);
+    socket.broadcast.to(data.room).emit('typing', data.feedback);
   });
+
+
+  
 });
 
-//app.use(router);
+app.use(router);
 
 
 
