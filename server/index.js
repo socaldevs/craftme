@@ -22,11 +22,16 @@ app.use(
   })
 );
 
+
+
 app.use(expressSession({ secret: 'secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use(router);
+
+
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
