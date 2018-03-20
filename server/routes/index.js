@@ -14,8 +14,4 @@ router.use('/user', userRouter);
 
 router.use('/auth', authRouter);
 
-router.use('*', (req, res) => {
-  res.send('this is a wildcard');
-});
-
 module.exports = router;
