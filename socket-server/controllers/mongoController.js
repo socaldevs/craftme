@@ -1,11 +1,14 @@
 const { ChatLog } = require('../db');
 
-let test = new ChatLog({
-  chats: [],
-});
-
-const testController = (req, res) => {
-  test.save().then((response) => res.json(response));
+exports.saveChat = (req, res) => {
+  const { messages } = req.body;
+  const newChatLog = new ChatLog({
+    messages: [...messages]
+  });
+  newChatLog.save().then(response => res.send(response));
 }
 
-module.exports = { testController };
+exports.fetchChat = (req, res) => {
+  const { id } = req.params; 
+  ChatLog.findOne({ _id: id }).then(response => res.send(response));
+}

@@ -1,10 +1,8 @@
 const router = require('express').Router();
-const { testController } = require('../controllers/mongoController'); 
+const { saveChat, fetchChat } = require('../controllers/mongoController'); 
 
-router.get('/chat', testController);
-
-//router.get('/chat/load', someController);
-router.post('/chat/save', (req, res) => res.send('hello from chat/save'));
+router.get('/chat/fetch/:id', fetchChat);
+router.post('/chat/save', saveChat);
 
 module.exports = { router };
 

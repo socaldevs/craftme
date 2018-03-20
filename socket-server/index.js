@@ -1,5 +1,18 @@
 const express = require('express');
 const socket = require('socket.io');
+const parser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+
+const middleware = [
+  helmet(),  
+  parser.json(),
+  parser.urlencoded({ extended: true }),
+  cors({
+    allowedHeaders: 'Content-Type, authorization',
+    methods: ['GET, POST, PUT, DELETE', 'OPTIONS'],
+  }),
+];
 
 const { router } = require('./routes');
 const db = require('./db');
@@ -19,27 +32,16 @@ io.on('connection', (socket) => {
     io.sockets.in(room).emit('message', 'SUUUUP');
   });
 
-  // handlers for that particular client only
-  // socket.on('chat', (data) => {
-  //   io.sockets.emit('chat', data);
-  // });
-
   socket.on('chat', (data) => {
     io.sockets.in(data.room).emit('chat', data);
   });
 
-  // socket.on('typing', (data) => {
-  //   socket.broadcast.emit('typing', data.feedback);
-  // });
-
   socket.on('typing', (data) => {
     socket.broadcast.to(data.room).emit('typing', data.feedback);
   });
-
-
-  
 });
 
+app.use(...middleware);
 app.use(router);
 
 
