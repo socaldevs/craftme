@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('skills', 'root', '', {
-  host: 'localhost',
+// setting up the connection configurations
+const sequelize = new Sequelize('skills', 'root', '1234', {
+  host: 'localhost',  // we might have to change this when deployment
   dialect: 'postgres',
   pool: {
     max: 5,
