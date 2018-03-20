@@ -1,6 +1,3 @@
 node_modules/
-<<<<<<< HEAD
-=======
 bundle.js
->>>>>>> [Backend] - commit for rebase
 package-lock.json
