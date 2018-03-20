@@ -15,19 +15,19 @@ const isAuthenticated = (req, res, next) => {
 };
 
 router.route('/signup').post(passport.authenticate('signup'), (req, res) => {
-  res.status(201).end(JSON.stringify(req.user));
+  res.status(201).send(req.user);
 });
 
 router.route('/signup').get((req, res) => {
-  res.render('register', { message: req.flash('Please log in') });
+  res.status(201).send('Please make an account');
 });
 
 router.route('/login').get((req, res) => {
-  res.render('index', { message: req.flash('Welcome!') });
+  res.status(201).send('Log in please');
 });
 
 router.route('/login').post(passport.authenticate('login'), (req, res) => {
-  res.status(201).end(JSON.stringify(req.user));
+  res.status(201).send(req.user);
 });
 
 router.route('/signout').get((req, res) => {
