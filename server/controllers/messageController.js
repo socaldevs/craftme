@@ -6,29 +6,26 @@ const userController = require('./userController.js');
 const conversationController = require('./conversationController.js');
 
 module.exports = {
-  //TODO: ask team about fetchAllMessages
   fetchAllMessages: async (req, res) => {
     try {
+      let messages = [];
       let { id } = req.params;
-      let messages = await db.Message.findAll({
-        where: {
-          [Op.or]: [
-            {
-              recipient_id: id
-            },
-            {
-              sender_id: id
-            }
-          ]
+      let conversations = await conversationController.fetchAllConversationsById(
+        id
+      );
+      let allConversations = await conversationController.fetchAllMessagesByConversations(
+        conversations
+      );
+      for (let i = 0; i < allConversations.length; i++) {
+        for (let j = 0; j < allConversations[i].length; j++) {
+          let username = await userController.fetchUsernameById(
+            allConversations[i][j].sender_id
+          );
+          allConversations[i][j].sender_id = username;
+          await messages.push(allConversations[i]);
         }
-      });
-      for (let i = 0; i < messages.length; i++) {
-        let username = await userController.fetchUsernameById(
-          messages[i].sender_id
-        );
-        messages[i].sender_id = username;
       }
-      res.send(messages);
+      res.send(allConversations);
     } catch (error) {
       console.log('Error with fetchAllMessages', error);
       return;
