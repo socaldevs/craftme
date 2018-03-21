@@ -48,5 +48,15 @@ module.exports = {
       console.log('Error with updateUserInfo', error);
       return;
     }
+  },
+
+  fetchUsernameById: async id => {
+    try {
+      let username = await db.User.findOne({ where: { id: id } });
+      return username.username;
+    } catch (error) {
+      console.log('Error with fetchUsernameById', id);
+      return;
+    }
   }
 };

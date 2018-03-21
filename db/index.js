@@ -9,6 +9,7 @@ const sequelize = new Sequelize('skills', 'root', '', {
     acquire: 30000,
     idle: 10000
   },
+  port: 5433,
   operatorsAliases: false
 });
 
