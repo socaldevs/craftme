@@ -30,6 +30,9 @@ router
 router.route('/messages/sendMessage').post(messageController.sendMessage);
 
 //continues a conversation
-router.route('/messages/replyMessage').post(messageController.replyMessage);
+// router.route('/messages/replyMessage').post(messageController.replyMessage);
+
+//grabs an id given the username
+router.route('/getIdByUsername/:username').get(userController.getIdByUsername);
 
 module.exports = router;
