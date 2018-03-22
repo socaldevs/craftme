@@ -33,7 +33,7 @@ const User = sequelize.define('user', {
   type: Sequelize.INTEGER,
   bio: Sequelize.STRING,
   profile_pic_url: Sequelize.STRING,
-  crafts: Sequelize.ARRAY(Sequelize.STRING),
+  // crafts: Sequelize.ARRAY(Sequelize.STRING),
   rating: Sequelize.INTEGER
 });
 
@@ -72,6 +72,15 @@ const Booking = sequelize.define('booking', {
   end: Sequelize.DATE,
 });
 
+const Craft = sequelize.define('craft', {
+  name: Sequelize.STRING,
+  description: Sequelize.STRING,
+});
+
+// join table
+const CraftTeacher = sequelize.define('craft_teacher', {
+});
+
 // Associations
 Conversation.belongsTo(User, { foreignKey: 'user_id' });
 Conversation.belongsTo(User, { foreignKey: 'recipient_id' });
@@ -86,4 +95,9 @@ Feedback.belongsTo(Lesson, { foreignKey: 'lesson_id' });
 Booking.belongsTo(User, { foreignKey: 'teacher_id' });
 Booking.belongsTo(User, { foreignKey: 'student_id' });
 
-module.exports = { User, Conversation, Message, Lesson, Feedback, Booking };
+User.belongsToMany(Craft, { through: CraftTeacher });
+Craft.belongsToMany(User, { through: CraftTeacher });
+
+
+
+module.exports = { User, Conversation, Message, Lesson, Feedback, Booking, Craft, CraftTeacher };

@@ -1,4 +1,4 @@
-const { User, Message, Lesson, Feedback, Booking } = require('./schema.js');
+const { User, Message, Lesson, Feedback, Booking, Craft, CraftTeacher } = require('./schema.js');
 
 const names = ['hero', 'potato', 'ninja', 'boy', 'thor', 'hulk'];
 const adjectives = ['super', 'greedy', 'fantastic', 'lazy', 'hAngry'];
@@ -84,11 +84,36 @@ const bookings = [
   
 ];
 
+const crafts = [
+  {
+    name: 'Tennis',
+    description: 'Very sexy game!'
+  },
+  {
+    name: 'Cooking',
+    description: 'The most boring and essential activity evaaaa!!'
+  },
+];
+
+//creating the associations seed data
+const craftTeachers = [
+  {
+    userId: 1,
+    craftId: 1,
+  },
+  {
+    userId: 1,
+    craftId: 2,
+  },
+];
+
 const createMany = async (entries, modelName) => {
   try {
     const models = {
       User,
       Booking,
+      Craft,
+      CraftTeacher
     };
 
     await models[modelName].bulkCreate(entries);
@@ -103,6 +128,8 @@ const insertAllSeedData = async () => {
   await createMany(teachers, 'User');
   await createMany(students, 'User');
   await createMany(bookings, 'Booking');
+  await createMany(crafts, 'Craft');
+  await createMany(craftTeachers, 'CraftTeacher');
   process.exit();  
 };
 
