@@ -18,10 +18,14 @@ module.exports = {
       );
       for (let i = 0; i < allConversations.length; i++) {
         for (let j = 0; j < allConversations[i].length; j++) {
-          let username = await userController.fetchUsernameById(
+          let sender = await userController.fetchUsernameById(
             allConversations[i][j].sender_id
           );
-          allConversations[i][j].sender_id = username;
+          let recipient = await userController.fetchUsernameById(
+            allConversations[i][j].recipient_id
+          );
+          allConversations[i][j].sender_id = sender;
+          allConversations[i][j].recipient_id = recipient;
           await messages.push(allConversations[i]);
         }
       }
