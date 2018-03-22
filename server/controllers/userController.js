@@ -58,5 +58,16 @@ module.exports = {
       console.log('Error with fetchUsernameById', id);
       return;
     }
+  },
+
+  getIdByUsername: async (req, res) => {
+    try {
+      let { username } = req.params;
+      let id = await db.User.findOne({ where: { username } });
+      res.status(201).send(id);
+    } catch (error) {
+      console.log('Error with getIdByUsername', error);
+      return;
+    }
   }
 };

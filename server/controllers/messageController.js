@@ -49,7 +49,7 @@ module.exports = {
           recipient_id: recipient_id,
           sender_id: sender_id,
           text: text,
-          conversation_id: exists.conversation_id
+          conversation_id: exists[0][0].id
         });
       } else {
         let query = await conversationController.createConversation(
@@ -69,20 +69,20 @@ module.exports = {
       console.log('Error with sendMessage', error);
       return;
     }
-  },
-  replyMessage: async (req, res) => {
-    try {
-      let { recipient_id, sender_id, text, conversation_id } = req.body;
-      let message = await db.Message.create({
-        recipient_id,
-        sender_id,
-        text,
-        conversation_id
-      });
-      res.send(message);
-    } catch (error) {
-      console.log('Error with replyMessage', error);
-      return;
-    }
   }
+  // replyMessage: async (req, res) => {
+  //   try {
+  //     let { recipient_id, sender_id, text, conversation_id } = req.body;
+  //     let message = await db.Message.create({
+  //       recipient_id,
+  //       sender_id,
+  //       text,
+  //       conversation_id
+  //     });
+  //     res.send(message);
+  //   } catch (error) {
+  //     console.log('Error with replyMessage', error);
+  //     return;
+  //   }
+  // }
 };
