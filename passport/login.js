@@ -27,12 +27,16 @@ module.exports = function(passport) {
             }
             if (isValidPassword(user, password)) {
               const payload = {
-                userId: user._id,
+                userId: user.id,
                 username: user.username,
                 exp: 7200000
               };
-              const token = jwt.sign(payload, 'secret');
-              return done(null, { username: username, token: token });
+              const token = await jwt.sign(payload, 'secret');
+              return done(null, {
+                username: username,
+                token: token,
+                id: user.id
+              });
             }
           }
         } catch (error) {
