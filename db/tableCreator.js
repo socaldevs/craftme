@@ -5,7 +5,9 @@ const {
   Message,
   Lesson,
   Feedback,
-  Booking
+  Booking,
+  Craft,
+  CraftTeacher
 } = require('./schema.js');
 
 const buildTables = async () => {
@@ -17,6 +19,8 @@ const buildTables = async () => {
     await Booking.sync({ force: false });
     await Lesson.sync({ force: false });
     await Feedback.sync({ force: false });
+    await Craft.sync({ force: false });
+    await CraftTeacher.sync({ force: false });
     console.log('-----All tables have been created!-----');
     //exit in the command line after creating tables 
     process.exit();
