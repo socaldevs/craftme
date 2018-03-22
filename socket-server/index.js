@@ -39,6 +39,7 @@ io.on('connection', (socket) => { // 'socket' represents specific client connect
   });
   socket.on('exit', (room) => {
     socket.leave(room);
+    io.sockets.in(room).emit('endCall', 'endCall');
   });
   socket.on('chat', (data) => {
     // console.log(io.sockets.adapter.rooms[roomId]);
