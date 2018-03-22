@@ -10,6 +10,9 @@ const router = express.Router();
 //submit a booking for a certain appointment
 router.route('/submitBooking').post(bookingController.submitBooking);
 
+//view the current bookings occupying teachers calender
+router.route('/viewTeacherAvailability/:teacher_id').get(bookingController.fetchTeacherBookings);
+
 //submit feedback after a lesson
 router.route('/submitFeedback').post(feedbackController.submitFeedback);
 

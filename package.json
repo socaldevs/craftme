@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-db": "node ./db/tableCreator.js",
-    "start": "nodemon ./server/",
-    "nodemon": "nodemon ./server/"
+    "seed-data": "node ./db/dataSeed.js",
+    "start": "nodemon ./server/"
   },
   "repository": {
     "type": "git",
@@ -26,15 +26,11 @@
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "express": "^4.16.3",
-
-    
-
     "express-session": "^1.15.6",
     "express-validation": "^1.0.2",
     "helmet": "^3.12.0",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
-
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",

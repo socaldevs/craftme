@@ -18,6 +18,8 @@ const buildTables = async () => {
     await Lesson.sync({ force: false });
     await Feedback.sync({ force: false });
     console.log('-----All tables have been created!-----');
+    //exit in the command line after creating tables 
+    process.exit();
   } catch (error) {
     console.log(error);
     return;

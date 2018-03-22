@@ -3,15 +3,31 @@ const db = require('../../db/schema.js');
 module.exports = {
   submitBooking: async (req, res) => {
     try {
-      let { student_id, teacher_id, timeslot } = req.body;
-      let booking = await db.Booking.create({
-        student_id: student_id,
-        teacher_id: teacher_id,
-        timeslot: timeslot //NEEDS TO BE AN ARRAY
+      const { student_id, teacher_id, start, end, title } = req.body;
+      const booking = await db.Booking.create({
+        student_id,
+        teacher_id,
+        start,
+        end,
+        title,
       });
       res.send(booking);
     } catch (error) {
-      console.log(error);
+      console.log('Error at submitBooking', error);
+      return;
+    }
+  },
+  fetchTeacherBookings: async (req, res) => {
+    try {
+      const { teacher_id } = req.params;
+      const bookings = await db.Booking.findAll({
+        where: {
+          teacher_id
+        }
+      });
+      res.send(bookings);
+    } catch (error) {
+      console.log('Error at fetchTeacherBookings', error);
       return;
     }
   },
@@ -29,9 +45,9 @@ module.exports = {
   //   //findanddelete the entry from the table
   // },
 
-  submitAvailability: (req, res) => {
-    //get all information from req.body
-    //confirmed = 0
-    //insert booking into bookings table
-  }
+  // submitAvailability: (req, res) => {
+  //   //get all information from req.body
+  //   //confirmed = 0
+  //   //insert booking into bookings table
+  // }
 };
