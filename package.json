@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-db": "node ./db/tableCreator.js",
+    "seed-data": "node ./db/dataSeed.js",
     "start": "nodemon ./server/"
   },
   "repository": {
