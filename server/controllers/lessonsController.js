@@ -17,12 +17,15 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let mChatId = await axios.get('http://localhost:3001/chat/save')
-      let { teacher_id, student_id, notes } = req.body;
+      let saved = await axios.post('http://localhost:3001/chat/save', req.body
+    );
+    let {teacher_id, student_id, notes } = saved.data.fakeBody;
+    let id = saved.data.saved._id;
+    console.log('this is id', id);
       let lesson = await db.Lesson.create({
         teacher_id: teacher_id,
         student_id: student_id,
-        chat_id: chat_id,
+        chat_id: id,
         notes: notes
       });
       res.send(lesson);

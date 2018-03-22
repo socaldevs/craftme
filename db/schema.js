@@ -2,29 +2,23 @@ const Sequelize = require('sequelize');
 const sequelize = require('./index.js');
 
 //Got those from codesling in case we want to create and drop db progrmatically
-const createDatabase = async (database) => {
+const createDatabase = async database => {
   try {
-    await sequelize.queryAsync(
-      `CREATE DATABASE ${database}`
-    );
+    await sequelize.queryAsync(`CREATE DATABASE ${database}`);
     success('successfully created database ', database);
   } catch (err) {
     error('error creating database ', err);
   }
 };
 
-const dropDatabase = async (database) => {
+const dropDatabase = async database => {
   try {
-    await sequelize.queryAsync(
-      `DROP DATABASE IF EXISTS ${database}`
-    );
+    await sequelize.queryAsync(`DROP DATABASE IF EXISTS ${database}`);
     success('successfully dropped database ', database);
   } catch (err) {
     error('error dropping database ', err);
   }
 };
-
-
 
 // Schema
 const User = sequelize.define('user', {
@@ -57,7 +51,7 @@ const Message = sequelize.define('message', {
 });
 
 const Lesson = sequelize.define('lesson', {
-  chat_id: Sequelize.INTEGER,
+  chat_id: Sequelize.STRING,
   notes: Sequelize.STRING
 });
 
@@ -69,7 +63,7 @@ const Feedback = sequelize.define('feedback', {
 const Booking = sequelize.define('booking', {
   title: Sequelize.STRING,
   start: Sequelize.DATE,
-  end: Sequelize.DATE,
+  end: Sequelize.DATE
 });
 
 const Craft = sequelize.define('craft', {
