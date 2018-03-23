@@ -34,8 +34,8 @@ io.on('connection', (socket) => { // 'socket' represents specific client connect
     socket.join(room);
     io.sockets.in(room).emit('confirmation', `Someone has joined room ${room}`);
   });
-  socket.on('renderchat', (data) => {
-    io.sockets.in(data.room).emit('renderchat', data.messages);
+  socket.on('renderChat', (data) => {
+    io.sockets.in(data.room).emit('renderChat', data.messages);
   });
   socket.on('exit', (room) => {
     socket.leave(room);
