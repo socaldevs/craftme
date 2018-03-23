@@ -3,8 +3,8 @@ const { User, Message, Lesson, Feedback, Booking, Craft, CraftTeacher } = requir
 const names = ['hero', 'potato', 'ninja', 'boy', 'thor', 'hulk'];
 const adjectives = ['super', 'greedy', 'fantastic', 'lazy', 'hAngry'];
 const getRandomUsername = (names, adjectives) => {
-  `${adjectives[Math.floor(Math.random() * adjectives.length)]}
-   ${names[Math.floor(Math.random() * names.length)]}`;
+  return (`${adjectives[Math.floor(Math.random() * adjectives.length)]} ` +
+  `${names[Math.floor(Math.random() * names.length)]}`);
   }
 
 //create users
@@ -17,7 +17,6 @@ for (let i = 0; i < 3; i++) {
     bio: 'Im very cool teacher',
     // profile_pic_url: 'https://i.pinimg.com/736x/67/74/cc/6774ccbd24f9aed12af9c485ff065008--wiener-dogs-dachshunds.jpg',
     profile_pic_url: 'nothing',
-    crafts:['a', 'b', 'c'],
     ratings: Math.floor(Math.random() * 5),  
   });
 }
@@ -104,6 +103,14 @@ const craftTeachers = [
   {
     userId: 1,
     craftId: 2,
+  },
+  {
+    userId: 2,
+    craftId: 1,
+  },
+  {
+    userId: 3,
+    craftId: 1,
   },
 ];
 

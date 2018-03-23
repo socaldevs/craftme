@@ -78,8 +78,7 @@ const Craft = sequelize.define('craft', {
 });
 
 // join table
-const CraftTeacher = sequelize.define('craft_teacher', {
-});
+const CraftTeacher = sequelize.define('craft_teacher', {});
 
 // Associations
 Conversation.belongsTo(User, { foreignKey: 'user_id' });

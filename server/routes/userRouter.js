@@ -35,4 +35,9 @@ router.route('/messages/sendMessage').post(messageController.sendMessage);
 //grabs an id given the username
 router.route('/getIdByUsername/:username').get(userController.getIdByUsername);
 
+// return all the crafts 
+router.route('/getAllCrafts').get(userController.getAllCrafts);
+
+router.route('/getCraftTeachers/:craftId').get(userController.getCraftTeachers);
+
 module.exports = router;
