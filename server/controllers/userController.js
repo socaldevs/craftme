@@ -55,7 +55,7 @@ module.exports = {
       let username = await db.User.findOne({ where: { id: id } });
       return username.username;
     } catch (error) {
-      console.log('Error with fetchUsernameById', id);
+      console.log('Error with fetchUsernameById', error);
       return;
     }
   },

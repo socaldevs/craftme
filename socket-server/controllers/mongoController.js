@@ -18,7 +18,13 @@ exports.saveChat = async (req, res) => {
   }
 };
 
-exports.fetchChat = (req, res) => {
-  const { id } = req.params;
-  ChatLog.findOne({ _id: id }).then(response => res.send(response));
+exports.fetchChat = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let response = await ChatLog.findById({ _id: id });
+    res.send(response);
+  } catch (error) {
+    console.log('Error with fetchChat', error);
+    return;
+  }
 };

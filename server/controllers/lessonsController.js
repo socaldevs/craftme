@@ -5,10 +5,11 @@ const axios = require('axios');
 
 module.exports = {
   //TODO: think about incorporating inner joins here
-  findMongoChatId: async user_id => {
+  fetchMongoChatById: async (req, res) => {
     try {
-      let {id} = req.params;
-      let 
+      let { id } = req.params;
+      let messages = await axios.get(`http://localhost:3001/chat/fetch/${id}`);
+      res.send(messages.data.messages);
     } catch (error) {
       console.log('Error with findMongoChatId', error);
       return;
@@ -17,11 +18,9 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let saved = await axios.post('http://localhost:3001/chat/save', req.body
-    );
-    let {teacher_id, student_id, notes } = saved.data.fakeBody;
-    let id = saved.data.saved._id;
-    console.log('this is id', id);
+      let saved = await axios.post('http://localhost:3001/chat/save', req.body);
+      let { teacher_id, student_id, notes } = saved.data.fakeBody;
+      let id = saved.data.saved._id;
       let lesson = await db.Lesson.create({
         teacher_id: teacher_id,
         student_id: student_id,

@@ -1,6 +1,7 @@
 const db = require('../../db/schema.js');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const userController = require('./userController.js');
 
 module.exports = {
   createConversation: (sender_id, recipient_id) => {
@@ -17,8 +18,9 @@ module.exports = {
       OR (user_id = ${recipient_id} AND recipient_id = ${sender_id})
     `;
   },
-  fetchAllConversationsById: async id => {
+  fetchAllConversationsById: async (req, res) => {
     try {
+      let { id } = req.params;
       let conversations = await db.Conversation.findAll({
         where: {
           [Op.or]: [
@@ -29,25 +31,40 @@ module.exports = {
               recipient_id: id
             }
           ]
-        }
+        },
+        raw: true
       });
-      return conversations;
+      for (let i = 0; i < conversations.length; i++) {
+        conversations[i].sender = await userController.fetchUsernameById(
+          conversations[i].user_id
+        );
+        conversations[i].recipient = await userController.fetchUsernameById(
+          conversations[i].recipient_id
+        );
+      }
+      res.send(conversations);
     } catch (error) {
       console.log('Error with fetchAllConversationsById', error);
     }
   },
-  fetchAllMessagesByConversations: async arr => {
+  fetchAllMessagesByConversationId: async (req, res) => {
     try {
-      let convos = [];
-      for (let i = 0; i < arr.length; i++) {
-        let messages = await db.Message.findAll({
-          where: {
-            conversation_id: arr[i].dataValues.id
-          }
-        });
-        await convos.push(messages);
+      let { id } = req.params;
+      let messages = await db.Message.findAll({
+        where: {
+          conversation_id: id
+        },
+        raw: true
+      });
+      for (let i = 0; i < messages.length; i++) {
+        messages[i].sender = await userController.fetchUsernameById(
+          messages[i].sender_id
+        );
+        messages[i].recipient = await userController.fetchUsernameById(
+          messages[i].recipient_id
+        );
       }
-      return convos;
+      res.send(messages);
     } catch (error) {
       console.log('Error with fetchAllMessagesByConversation,', error);
     }
