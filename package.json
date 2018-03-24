@@ -43,6 +43,7 @@
     "pg": "^7.4.1",
     "redis": "^2.8.0",
     "sequelize": "^4.36.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "watson-developer-cloud": "^3.2.1"
   }
 }
