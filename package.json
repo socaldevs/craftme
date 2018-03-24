@@ -39,8 +39,11 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "peer": "^0.2.8",
     "pg": "^7.4.1",
+    "redis": "^2.8.0",
     "sequelize": "^4.36.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "watson-developer-cloud": "^3.2.1"
   }
 }

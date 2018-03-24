@@ -1,4 +1,4 @@
-const { ChatLog } = require('../db');
+const { ChatLog } = require('../db/mongoDB');
 
 exports.saveChat = (req, res) => {
   const { messages } = req.body;
