@@ -32,7 +32,7 @@ router.route('/login').post(passport.authenticate('login'), (req, res) => {
 
 router.route('/signout').get((req, res) => {
   req.logout();
-  res.redirect('/login');
+  res.send('Logged out!');
 });
 
 module.exports = router;

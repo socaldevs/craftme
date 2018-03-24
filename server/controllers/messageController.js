@@ -6,35 +6,15 @@ const userController = require('./userController.js');
 const conversationController = require('./conversationController.js');
 
 module.exports = {
-  fetchAllMessages: async (req, res) => {
-    try {
-      let messages = [];
-      let { id } = req.params;
-      let conversations = await conversationController.fetchAllConversationsById(
-        id
-      );
-      let allConversations = await conversationController.fetchAllMessagesByConversations(
-        conversations
-      );
-      for (let i = 0; i < allConversations.length; i++) {
-        for (let j = 0; j < allConversations[i].length; j++) {
-          let sender = await userController.fetchUsernameById(
-            allConversations[i][j].sender_id
-          );
-          let recipient = await userController.fetchUsernameById(
-            allConversations[i][j].recipient_id
-          );
-          allConversations[i][j].sender_id = sender;
-          allConversations[i][j].recipient_id = recipient;
-          await messages.push(allConversations[i]);
-        }
-      }
-      res.send(allConversations);
-    } catch (error) {
-      console.log('Error with fetchAllMessages', error);
-      return;
-    }
-  },
+  // fetchAllMessages: async (req, res) => {
+  //   try {
+  //     let { id } = req.params;
+  //   } catch (error) {
+  //     console.log('Error with fetchAllMessages', error);
+  //     return;
+  //   }
+  // },
+
   sendMessage: async (req, res) => {
     try {
       let message, result;
@@ -70,19 +50,30 @@ module.exports = {
       return;
     }
   }
-  // replyMessage: async (req, res) => {
-  //   try {
-  //     let { recipient_id, sender_id, text, conversation_id } = req.body;
-  //     let message = await db.Message.create({
-  //       recipient_id,
-  //       sender_id,
-  //       text,
-  //       conversation_id
-  //     });
-  //     res.send(message);
-  //   } catch (error) {
-  //     console.log('Error with replyMessage', error);
-  //     return;
-  //   }
-  // }
 };
+
+// TODO: REMOVE IF UNNECESSARY, OLD FETCHALLMESSAGES
+//   let conversations = await conversationController.fetchAllConversationsById(
+//     id
+//   );
+//   let allConversations = await conversationController.fetchAllMessagesByConversations(
+//     conversations
+//   );
+//   for (let i = 0; i < allConversations.length; i++) {
+//     for (let j = 0; j < allConversations[i].length; j++) {
+//       let sender = await userController.fetchUsernameById(
+//         allConversations[i][j].sender_id
+//       );
+//       let recipient = await userController.fetchUsernameById(
+//         allConversations[i][j].recipient_id
+//       );
+//       allConversations[i][j].sender_id = sender;
+//       allConversations[i][j].recipient_id = recipient;
+//       await messages.push(allConversations[i]);
+//     }
+//   }
+//   res.send(allConversations);
+// } catch (error) {
+//   console.log('Error with fetchAllMessages', error);
+//   return;
+// }
