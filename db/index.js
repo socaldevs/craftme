@@ -15,7 +15,11 @@ const sequelize = new Sequelize('skills', 'root', '1234', {
     acquire: 30000,
     idle: 10000
   },
+<<<<<<< HEAD
   port: 5432 || 5433,
+=======
+  port: 5433,
+>>>>>>> [Rebase] - commit for rebase
   operatorsAliases: false
 });
 
