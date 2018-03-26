@@ -1,4 +1,4 @@
-const { User, Message, Lesson, Feedback, Booking, Craft, CraftTeacher } = require('./schema.js');
+const { User, Message, Lesson, Feedback, Booking, Craft, CraftTeacher, Availability } = require('./schema.js');
 
 const names = ['hero', 'potato', 'ninja', 'boy', 'thor', 'hulk'];
 const adjectives = ['super', 'greedy', 'fantastic', 'lazy', 'hAngry'];
@@ -30,7 +30,7 @@ for (let i = 0; i < 3; i++) {
     bio: 'Student',
     // profile_pic_url: 'https://i.pinimg.com/736x/67/74/cc/6774ccbd24f9aed12af9c485ff065008--wiener-dogs-dachshunds.jpg',
     profile_pic_url: 'nothing',
-    crafts:null,
+    rating: null
   });
 }
 const bookings = [
@@ -114,13 +114,36 @@ const craftTeachers = [
   },
 ];
 
+const availability = [
+  { 
+    teacher_id: 1,
+    start: new Date(2018, 2, 26, 17, 0, 0),
+    end: new Date(2018, 2, 26, 18, 0, 0),
+  },
+
+  { 
+    teacher_id: 1,
+    start: new Date(2018, 2, 26, 9, 30, 0),
+    end: new Date(2018, 2, 26, 11, 30, 0),
+  },
+
+  { 
+    teacher_id: 1,
+    start: new Date(2018, 2, 27, 13, 0, 0),
+    end: new Date(2018, 2, 27, 14, 0, 0),
+  },
+  
+];
+
+
 const createMany = async (entries, modelName) => {
   try {
     const models = {
       User,
       Booking,
       Craft,
-      CraftTeacher
+      CraftTeacher,
+      Availability
     };
 
     await models[modelName].bulkCreate(entries);
@@ -133,10 +156,11 @@ const createMany = async (entries, modelName) => {
 
 const insertAllSeedData = async () => {
   await createMany(teachers, 'User');
-  await createMany(students, 'User');
+  await createMany(students, 'User'); 
   await createMany(bookings, 'Booking');
   await createMany(crafts, 'Craft');
   await createMany(craftTeachers, 'CraftTeacher');
+  await createMany(availability, 'Availability');
   process.exit();  
 };
 
