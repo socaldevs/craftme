@@ -15,7 +15,7 @@ module.exports = passport => {
       async (req, username, password, done) => {
         const user = await db.User.findOne({ where: { username: username } });
         if (user) {
-          return done(null, false, { message: 'incorrect password' });
+          return done(null, false, { message: 'user already exists' });
         } else {
           db.User.create({
             username: username,
