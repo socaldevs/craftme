@@ -22,7 +22,8 @@ const dropDatabase = async database => {
 
 // Schema
 const User = sequelize.define('user', {
-  username: { type: Sequelize.STRING, unique: true },
+  // username: { type: Sequelize.STRING, unique: true },
+  username: Sequelize.STRING,
   password: Sequelize.STRING,
   type: Sequelize.INTEGER,
   bio: Sequelize.STRING,
@@ -71,6 +72,11 @@ const Craft = sequelize.define('craft', {
   description: Sequelize.STRING,
 });
 
+const Availability = sequelize.define('availability', {
+  start: Sequelize.DATE,
+  end: Sequelize.DATE,
+});
+
 // join table
 const CraftTeacher = sequelize.define('craft_teacher', {});
 
@@ -87,10 +93,11 @@ Feedback.belongsTo(User, { foreignKey: 'student_id' });
 Feedback.belongsTo(Lesson, { foreignKey: 'lesson_id' });
 Booking.belongsTo(User, { foreignKey: 'teacher_id' });
 Booking.belongsTo(User, { foreignKey: 'student_id' });
+Availability.belongsTo(User, { foreignKey: 'teacher_id' });
 
 User.belongsToMany(Craft, { through: CraftTeacher });
 Craft.belongsToMany(User, { through: CraftTeacher });
 
 
 
-module.exports = { User, Conversation, Message, Lesson, Feedback, Booking, Craft, CraftTeacher };
+module.exports = { User, Conversation, Message, Lesson, Feedback, Booking, Craft, CraftTeacher, Availability };
