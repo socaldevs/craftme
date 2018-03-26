@@ -1,5 +1,6 @@
 const db = require('../../db/schema.js');
 const sequelize = require('sequelize');
+const { languageTranslator } = require('../languageTranslator.js');
 
 module.exports = {
   fetchUserInfo: async (req, res) => {
@@ -98,4 +99,32 @@ module.exports = {
     }
   },
 
+  getTranslation: (req, res) => {
+    const { text, translateFrom, translateTo } = req.body;
+    const parameters = {
+      text,
+      model_id: `${translateFrom}-${translateTo}`,
+    };
+    languageTranslator.translate(
+      parameters,
+      (error, response) => {
+        if (error)
+          console.log(error)
+        else
+          res.send(JSON.stringify(JSON.stringify(response.translations[0].translation, null, 2)));
+      }
+    );
+  },
+
+  getLanguageList: (req, res) => {
+    languageTranslator.listIdentifiableLanguages(
+      {},
+      (err, response) => {
+        if (err)
+          console.log(err)
+        else
+          res.send(JSON.stringify(response.languages, null, 2));
+      }
+    );
+  }
 };
