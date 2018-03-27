@@ -35,7 +35,8 @@ module.exports = function(passport) {
               return done(null, {
                 username: username,
                 token: token,
-                id: user.id
+                id: user.id,
+                type: user.type
               });
             }
           }

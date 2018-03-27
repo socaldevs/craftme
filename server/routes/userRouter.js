@@ -51,4 +51,10 @@ router.route('/getAllCrafts').get(userController.getAllCrafts);
 
 router.route('/getCraftTeachers/:craftId').get(userController.getCraftTeachers);
 
+// get translation
+router.route('/translate').post(userController.getTranslation);
+
+// get list of languages
+router.route('/languages').get(userController.getLanguageList);
+
 module.exports = router;
