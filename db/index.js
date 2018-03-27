@@ -1,8 +1,12 @@
 const Sequelize = require('sequelize');
+const env = require('dotenv');
+const path = require('path');
+const ENV = path.resolve(__dirname, '../.env')
+env.config({path: (ENV)});
+console.log("database path: ",ENV)
 
-// setting up the connection configurations
-const sequelize = new Sequelize('skills', 'root', '1234', {
-  host: 'localhost', // we might have to change this when deployment
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  host: process.env.DB_HOST,
   dialect: 'postgres',
   pool: {
     max: 5,
@@ -10,8 +14,8 @@ const sequelize = new Sequelize('skills', 'root', '1234', {
     acquire: 30000,
     idle: 10000
   },
+  port: process.env.DB_PORT,
   logging: false,
-  // port: 5433,
   operatorsAliases: false
 });
 

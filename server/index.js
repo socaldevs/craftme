@@ -8,6 +8,10 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const cors = require('cors');
 const helmet = require('helmet');
+const env = require('dotenv');
+const ENV = path.resolve(__dirname, '../.env');
+env.config({path: ENV});
+console.log("rest server path: ",ENV)
 
 const app = express();
 
@@ -33,7 +37,7 @@ app.use(router);
 
 
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+app.listen(process.env.REST_PORT, () => console.log(`RESTful server listening on port ${process.env.REST_PORT}`));
 
 // setting the connection with the db
 sequelize.sync()
