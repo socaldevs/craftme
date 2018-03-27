@@ -2,13 +2,20 @@ const db = require('../../db/schema.js');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const axios = require('axios');
+const path = require('path');
+const env = require('dotenv');
+const ENV = path.resolve(__dirname, '../../.env');
+env.config({path: ENV});
+console.log("lesson contoller path: ",ENV)
+
+//console.log("lscon", process.env.SOCKET_PATH)
 
 module.exports = {
   //TODO: think about incorporating inner joins here
   fetchMongoChatById: async (req, res) => {
     try {
       let { id } = req.params;
-      let messages = await axios.get(`http://localhost:3001/chat/fetch/${id}`);
+      let messages = await axios.get(`${process.env.SOCKET_PATH}/chat/fetch/${id}`);
       res.send(messages.data.messages);
     } catch (error) {
       console.log('Error with findMongoChatId', error);
@@ -18,7 +25,7 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let saved = await axios.post('http://localhost:3001/chat/save', req.body);
+      let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, req.body);
       let { teacher_id, student_id, notes } = saved.data.fakeBody;
       let id = saved.data.saved._id;
       let lesson = await db.Lesson.create({
