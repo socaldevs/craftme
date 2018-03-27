@@ -6,10 +6,16 @@ const helmet = require('helmet');
 const { router } = require('./routes');
 const mongoDB = require('./db/mongoDB');
 //const redis = require('./db/redis');
+const path = require('path');
+const env = require('dotenv');
+const ENV = path.resolve(__dirname, '../.env');
+env.config({path: ENV});
+console.log("socket server path: ",ENV)
 
-const PORT = 3001;
+
+const PORT = process.env.SOCKET_PORT;
 const app = express();
-const server = app.listen(PORT, console.log(`Listening to PORT ${PORT}!`));
+const server = app.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
 const io = socket(server); // io is server upgraded w/ web socket connection
 const ExpressPeerServer = require('peer').ExpressPeerServer;
 

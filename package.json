@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-db": "node ./db/tableCreator.js",
     "seed-data": "node ./db/dataSeed.js",
-    "start": "nodemon ./server/"
+    "start": "nodemon ./server/",
+    "socket": "nodemon ./socket-server/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "express": "^4.16.3",
