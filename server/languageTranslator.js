@@ -6,29 +6,10 @@ const languageTranslator = new LanguageTranslatorV2({
   url: 'https://gateway.watsonplatform.net/language-translator/api/'
 });
 
-let parameters = {
-  text: 'Goodbye',
-  model_id: 'en-es'
-};
+console.log('LOOK', process.env.PEERKEY);
 
-// languageTranslator.translate(
-//   parameters,
-//   (error, response) => {
-//     if (error)
-//       console.log(error)
-//     else
-//       console.log(JSON.stringify(response, null, 2));
-//   }
-// );
-
-// languageTranslator.listIdentifiableLanguages(
-//   {},
-//   (err, response) => {
-//     if (err)
-//       console.log(err)
-//     else
-//       console.log(JSON.stringify(response, null, 2));
-//   }
-// );
+// username: `${process.env.USRNM}`,
+//   password: `${process.env.PSWRD}`,
+//   url: `${process.env.WATSON}`
 
 module.exports = { languageTranslator };
