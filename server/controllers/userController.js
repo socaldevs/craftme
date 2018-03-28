@@ -2,6 +2,7 @@ const db = require('../../db/schema.js');
 const sequelize = require('sequelize');
 const { languageTranslator } = require('../languageTranslator.js');
 
+
 module.exports = {
   fetchUserInfo: async (req, res) => {
     try {
@@ -18,12 +19,14 @@ module.exports = {
 
   addTeacherOrStudent: async (req, res) => {
     try {
-      let { username, type, bio, profile_pic_url, crafts, rating } = req.body;
+      //add ---->       crafts, rating
+      let { username, type, bio, profile_pic, crafts, rating} = req.body;
+      //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
       let newUser = await db.User.create({
         username: username,
         type: type,
         bio: bio,
-        profile_pic_url: profile_pic_url,
+        profile_pic_url: profile_pic,
         crafts: crafts,
         rating: rating
       });

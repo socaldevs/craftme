@@ -36,7 +36,9 @@ module.exports = function(passport) {
                 username: username,
                 token: token,
                 id: user.id,
-                type: user.type
+                type: user.type,
+                profile_pic_url: user.bio,
+                profile_pic_url: user.profile_pic_url
               });
             }
           }
