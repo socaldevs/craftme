@@ -135,6 +135,26 @@ const availability = [
   
 ];
 
+const lessons = [
+  {
+    chat_id: 1,
+    teacher_id: 1,
+    student_id: 5,
+    notes: 'hi'
+  },
+  {
+    chat_id: 2,
+    teacher_id: 1,
+    student_id: 4,
+    notes: 'hello'
+  },
+  {
+    chat_id: 3,
+    teacher_id: 1,
+    student_id: 6,
+    notes: 'hey'
+  }
+];
 
 const createMany = async (entries, modelName) => {
   try {
@@ -143,7 +163,8 @@ const createMany = async (entries, modelName) => {
       Booking,
       Craft,
       CraftTeacher,
-      Availability
+      Availability,
+      Lesson
     };
 
     await models[modelName].bulkCreate(entries);
@@ -161,6 +182,7 @@ const insertAllSeedData = async () => {
   await createMany(crafts, 'Craft');
   await createMany(craftTeachers, 'CraftTeacher');
   await createMany(availability, 'Availability');
+  await createMany(lessons, 'Lesson');
   process.exit();  
 };
 

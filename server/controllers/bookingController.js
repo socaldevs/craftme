@@ -25,10 +25,23 @@ const submitBooking = async (req, res) => {
     console.log('Error at submitBooking', error);
     return;
   }
-}
+};
+
+const getAllBookingsForUser = async (req, res) => {
+  let { userId } = req.query;
+  userId = JSON.parse(req.query.userId);
+  
+  try {
+    const bookings = await db.Booking.findAll({ where: userId });
+    res.status(200).send(bookings);
+  } catch (error) {
+    console.error('\x1b[31m%s', 'error while finding all the bookings', error, '\x1b[0m');
+  }
+
+};
 
 
-module.exports = { submitBooking };
+module.exports = { submitBooking , getAllBookingsForUser};
 
 //TODO: determine if these functions are needed
 

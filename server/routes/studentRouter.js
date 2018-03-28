@@ -6,6 +6,7 @@ const feedbackController = require('../controllers/feedbackController.js');
 const messageController = require('../controllers/messageController.js');
 const availabilityController = require('../controllers/availabilityController');
 
+
 const router = express.Router();
 
 //submit a booking for a certain appointment
@@ -21,7 +22,7 @@ router.route('/submitFeedback').post(feedbackController.submitFeedback);
 
 //get all teachers for a certain craft
 router
-  .route('/fetchAllTeachersForCraft/:craft')
-  .get(lessonsController.fetchAllTeachersForCraft);
+  .route('/fetchAllTeachersForCraft/:craftId')
+  .get(userController.getCraftTeachers);
 
 module.exports = router;
