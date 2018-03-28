@@ -9,12 +9,15 @@ const expressSession = require('express-session');
 const cors = require('cors');
 const helmet = require('helmet');
 const env = require('dotenv');
+const fileUpload = require('express-fileupload');
+
 const ENV = path.resolve(__dirname, '../.env');
 env.config({path: ENV});
 console.log("rest server path: ",ENV)
 
 const app = express();
 
+app.use(fileUpload());
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -30,6 +30,15 @@ router
   .get(conversationController.fetchAllMessagesByConversationId);
 
 //adds a new user to the database
+//Here is route
+//
+//
+//
+//
+//
+//
+//
+//
 router.route('/addTeacherOrStudent').post(userController.addTeacherOrStudent);
 
 //gets a user's profile/info
