@@ -45,8 +45,12 @@ module.exports = {
     try {
       let { userId } = req.query;
       userId = JSON.parse(req.query.userId);
+      console.log('userid in fetchAllLessons', userId);
 
-      let allLessons = await db.Lesson.findAll({ where: userId });
+      let allLessons = await db.Lesson.findAll({ where:{ [Op.or]: [
+        {student_id: userId},
+        {teacher_id: userId}
+      ] }});
       res.send(allLessons);
       // let { id } = req.params; //contingent upon passing
       // let allLessons = await db.Lesson.findAll({
