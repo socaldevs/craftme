@@ -43,20 +43,25 @@ module.exports = {
 
   fetchAllLessons: async (req, res) => {
     try {
-      let { id } = req.params; //contingent upon passing
-      let allLessons = await db.Lesson.findAll({
-        where: {
-          [Op.or]: [
-            {
-              student_id: id
-            },
-            {
-              teacher_id: id
-            }
-          ]
-        }
-      });
+      let { userId } = req.query;
+      userId = JSON.parse(req.query.userId);
+
+      let allLessons = await db.Lesson.findAll({ where: userId });
       res.send(allLessons);
+      // let { id } = req.params; //contingent upon passing
+      // let allLessons = await db.Lesson.findAll({
+      //   where: {
+      //     [Op.or]: [
+      //       {
+      //         student_id: id
+      //       },
+      //       {
+      //         teacher_id: id
+      //       }
+      //     ]
+      //   }
+      // });
+      // res.send(allLessons);
     } catch (error) {
       console.log('Error with fetchAllLessons', error);
       return;
@@ -68,21 +73,21 @@ module.exports = {
     //possible MVP+
   },
 
-  fetchAllTeachersForCraft: async (req, res) => {
-    try {
-      let { craft } = req.params;
-      let teachers = await db.User.findAll({
-        where: {
-          crafts: {
-            [Op.contains]: [craft]
-          },
-          [Op.and]: [{ type: 2 }]
-        }
-      });
-      res.send(teachers);
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  }
+  // fetchAllTeachersForCraft: async (req, res) => {
+  //   try {
+  //     let { craft } = req.params;
+  //     let teachers = await db.User.findAll({
+  //       where: {
+  //         crafts: {
+  //           [Op.contains]: [craft]
+  //         },
+  //         [Op.and]: [{ type: 2 }]
+  //       }
+  //     });
+  //     res.send(teachers);
+  //   } catch (error) {
+  //     console.log(error);
+  //     return;
+  //   }
+  // }
 };
