@@ -12,7 +12,6 @@ const ENV = path.resolve(__dirname, '../.env');
 env.config({path: ENV});
 console.log("socket server path: ",ENV)
 
-
 const PORT = process.env.SOCKET_PORT;
 const app = express();
 const server = app.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
@@ -33,7 +32,7 @@ const middleware = [
   }),
 ];
 
-io.on('connection', (socket) => { // 'socket' represents specific client connection
+io.on('connection', (socket) => { 
   console.log('made SOCKET connection!', socket.id);
   
   socket.on('room', (room) => {
@@ -48,7 +47,6 @@ io.on('connection', (socket) => { // 'socket' represents specific client connect
     io.sockets.in(room).emit('endCall', 'endCall');
   });
   socket.on('chat', (data) => {
-    // console.log(io.sockets.adapter.rooms[roomId]);
     io.sockets.in(data.room).emit('chat', data);
   });
   socket.on('typing', (data) => {

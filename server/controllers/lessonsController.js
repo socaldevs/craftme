@@ -6,9 +6,6 @@ const path = require('path');
 const env = require('dotenv');
 const ENV = path.resolve(__dirname, '../../.env');
 env.config({path: ENV});
-console.log("lesson contoller path: ",ENV)
-
-//console.log("lscon", process.env.SOCKET_PATH)
 
 module.exports = {
   //TODO: think about incorporating inner joins here

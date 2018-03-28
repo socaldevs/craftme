@@ -9,12 +9,19 @@ const expressSession = require('express-session');
 const cors = require('cors');
 const helmet = require('helmet');
 const env = require('dotenv');
+<<<<<<< HEAD
 const fileUpload = require('express-fileupload');
 
 
+=======
+>>>>>>> [commit] before Arthur booking changes
 const ENV = path.resolve(__dirname, '../.env');
-env.config({path: ENV});
 
+env.config({path: ENV});
+<<<<<<< HEAD
+
+=======
+>>>>>>> [commit] before Arthur booking changes
 
 const app = express();
 
@@ -33,14 +40,16 @@ app.use(
 app.use(expressSession({ secret: 'secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(router);
 
+<<<<<<< HEAD
 
 app.listen(process.env.REST_PORT, () => console.log(`RESTful server listening on port ${process.env.REST_PORT}`));
 
+=======
+app.listen(process.env.REST_PORT, () => console.log(`RESTful server listening on port ${process.env.REST_PORT}`));
+>>>>>>> [commit] before Arthur booking changes
 
-// setting the connection with the db
 sequelize.sync()
   .then(() => {
     console.log('DB synced');
