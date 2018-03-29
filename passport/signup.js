@@ -47,29 +47,54 @@ module.exports = passport => {
 
         //console.log("full req to AUTH: ", req.body)
         let bucket = "craftme"
-        let active = (req.files) ? req.files.profile_pic : ""
-        let url = (active !== "") ? `https://${bucket}.s3.amazonaws.com/${active.name}` : ""
-        
-        // console.log("username: ", req.body.username);
-        // console.log("password: ", req.body.password);
-        // console.log("bio: ", req.body.bio);
-        // console.log("file: ", active);
-        // console.log("type: ", req.body.type);
+        console.log("bucket: ", bucket);
+
+
         const user = await db.User.findOne({ where: { username: username } });
         if (user) {
           return done(null, false, { message: 'user already exists' });
         } else {
-
-          uploadFile(bucket, active,(data) => {
-            console.log("From AWS", data)
-          db.User.create({
-            username: username,
-            password: createHash(password),
-            type: req.body.type,
-            bio: req.body.bio,
-            profile_pic_url: url
-          }); })
-          return done(null, { username: username });
+          if (req.files){
+            let active = req.files.profile_pic;
+            uploadFile(bucket, active,(data) => {console.log("From AWS", data)
+              const url = `https://${bucket}.s3.amazonaws.com/${active.name}`;
+    
+    
+              console.log("file: ", active);
+              console.log("url: ", url);
+              console.log("username: ", req.body.username);
+              console.log("password: ", req.body.password);
+              console.log("bio: ", req.body.bio);
+              console.log("type: ", req.body.type);
+    
+              db.User.create({
+                username: username,
+                password: createHash(password),
+                type: req.body.type,
+                bio: req.body.bio,
+                profile_pic_url: url
+              });
+    
+            })
+           }
+           else{
+            console.log("NO PHOTO");
+            console.log("username: ", req.body.username);
+            console.log("password: ", req.body.password);
+            console.log("bio: ", req.body.bio);
+            console.log("type: ", req.body.type);
+            const url = "";
+            const active = null;
+    
+            db.User.create({
+              username: username,
+              password: createHash(password),
+              type: req.body.type,
+              bio: req.body.bio,
+              profile_pic_url: url
+            }); 
+           }
+           return done(null, { username: username });
         }
       }
     )
