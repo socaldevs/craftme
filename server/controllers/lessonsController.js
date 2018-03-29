@@ -26,10 +26,11 @@ module.exports = {
       let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
       let id = saved.data._id;
       let lesson = await db.Lesson.create({
-        teacher_id: teacher_id,
-        student_id: student_id,
+        teacher_id,
+        student_id,
         chat_id: id,
-        notes: notes
+        notes,
+        title
       });
       res.send(lesson);
     } catch (error) {
@@ -65,21 +66,4 @@ module.exports = {
     //possible MVP+
   },
 
-  // fetchAllTeachersForCraft: async (req, res) => {
-  //   try {
-  //     let { craft } = req.params;
-  //     let teachers = await db.User.findAll({
-  //       where: {
-  //         crafts: {
-  //           [Op.contains]: [craft]
-  //         },
-  //         [Op.and]: [{ type: 2 }]
-  //       }
-  //     });
-  //     res.send(teachers);
-  //   } catch (error) {
-  //     console.log(error);
-  //     return;
-  //   }
-  // }
 };

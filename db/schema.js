@@ -53,7 +53,8 @@ const Message = sequelize.define('message', {
 
 const Lesson = sequelize.define('lesson', {
   chat_id: Sequelize.STRING,
-  notes: Sequelize.STRING
+  notes: Sequelize.STRING,
+  title: Sequelize.STRING,
 });
 
 const Feedback = sequelize.define('feedback', {

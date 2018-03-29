@@ -140,19 +140,22 @@ const lessons = [
     chat_id: 1,
     teacher_id: 1,
     student_id: 5,
-    notes: 'hi'
+    notes: 'hi',
+    title: 'arabic coffee'
   },
   {
     chat_id: 2,
     teacher_id: 1,
     student_id: 4,
-    notes: 'hello'
+    notes: 'hello',
+    title: 'im still hungry'
   },
   {
     chat_id: 3,
     teacher_id: 1,
     student_id: 6,
-    notes: 'hey'
+    notes: 'hey',
+    title: 'yo give me some flatbread'
   }
 ];
 
