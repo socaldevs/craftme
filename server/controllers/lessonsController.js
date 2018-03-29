@@ -16,7 +16,7 @@ module.exports = {
     try {
       let { id } = req.params;
       let messages = await axios.get(`${process.env.SOCKET_PATH}/chat/fetch/${id}`);
-      res.send(messages.data.messages);
+      res.send(messages.data);
     } catch (error) {
       console.log('Error with findMongoChatId', error);
       return;
