@@ -12,8 +12,8 @@ const env = require('dotenv');
 const fileUpload = require('express-fileupload');
 
 const ENV = path.resolve(__dirname, '../.env');
+
 env.config({path: ENV});
-console.log("rest server path: ",ENV)
 
 const app = express();
 
@@ -29,20 +29,15 @@ app.use(
   })
 );
 
-
-
 app.use(expressSession({ secret: 'secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 app.use(router);
-
 
 
 app.listen(process.env.REST_PORT, () => console.log(`RESTful server listening on port ${process.env.REST_PORT}`));
 
-// setting the connection with the db
+
 sequelize.sync()
   .then(() => {
     console.log('DB synced');
