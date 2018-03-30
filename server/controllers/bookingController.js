@@ -1,5 +1,7 @@
 const db = require('../../db/schema.js');
 const { removeAvailability } = require('./availabilityController.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const submitBooking = async (req, res) => {
   try {
@@ -28,11 +30,21 @@ const submitBooking = async (req, res) => {
 };
 
 const getAllBookingsForUser = async (req, res) => {
-  let { userId } = req.query;
-  userId = JSON.parse(req.query.userId);
+  console.log('req.params is================>', req.params);
+  let { id } = req.params;
+  // userId = JSON.parse(req.query.userId);
   
   try {
-    const bookings = await db.Booking.findAll({ where: userId });
+    const bookings = await db.Booking.findAll( {where: {
+      [Op.or]: [
+        {
+          teacher_id: id
+        },
+        {
+          student_id: id
+        }
+      ]
+    }});
     res.status(200).send(bookings);
   } catch (error) {
     console.error('\x1b[31m%s', 'error while finding all the bookings', error, '\x1b[0m');

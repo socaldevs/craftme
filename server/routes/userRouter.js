@@ -12,7 +12,7 @@ router.route('/saveLesson').post(lessonsController.saveLesson);
 
 //loads upcoming lessons and past lessons
 // router.route('/fetchAllLessons/:id').get(lessonsController.fetchAllLessons);
-router.route('/fetchAllLessons/').get(lessonsController.fetchAllLessons);
+router.route('/fetchAllLessons/:id').get(lessonsController.fetchAllLessons);
 
 //gets chat for a specific lesson
 router
@@ -68,5 +68,5 @@ router.route('/translate').post(userController.getTranslation);
 router.route('/languages').get(userController.getLanguageList);
 
 // router.route('/getAllBookingsForUser/:userId').get(bookingController.getAllBookingsForUser);
-router.route('/getAllBookingsForUser/').get(bookingController.getAllBookingsForUser);
+router.route('/getAllBookingsForUser/:id').get(bookingController.getAllBookingsForUser);
 module.exports = router;

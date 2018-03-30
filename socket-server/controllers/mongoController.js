@@ -2,16 +2,13 @@ const { ChatLog } = require('../db/mongoDB');
 
 exports.saveChat = async (req, res) => {
   try {
-    const { messages, teacher_id, student_id, notes } = req.body;
-    let fakeBody = {};
-    fakeBody.teacher_id = teacher_id;
-    fakeBody.student_id = student_id;
-    fakeBody.notes = notes;
+    const messages  = req.body;
     const newChatLog = await new ChatLog({
-      messages: [...messages]
+      messages
+      // messages: [...messages]
     });
-    let saved = await newChatLog.save();
-    res.json({ fakeBody: fakeBody, saved: saved });
+    let savedChats = await newChatLog.save();
+    res.send(savedChats);
   } catch (error) {
     console.log('error with saveChat', error);
     return;

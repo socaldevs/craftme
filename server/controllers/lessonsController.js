@@ -25,9 +25,9 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, req.body);
-      let { teacher_id, student_id, notes } = saved.data.fakeBody;
-      let id = saved.data.saved._id;
+      let { teacher_id, student_id, notes, messages } = req.body;
+      let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
+      let id = saved.data._id;
       let lesson = await db.Lesson.create({
         teacher_id: teacher_id,
         student_id: student_id,
@@ -43,29 +43,20 @@ module.exports = {
 
   fetchAllLessons: async (req, res) => {
     try {
-      let { userId } = req.query;
-      userId = JSON.parse(req.query.userId);
-      console.log('userid in fetchAllLessons', userId);
-
-      let allLessons = await db.Lesson.findAll({ where:{ [Op.or]: [
-        {student_id: userId},
-        {teacher_id: userId}
-      ] }});
+      let { id } = req.params; //contingent upon passing
+      let allLessons = await db.Lesson.findAll({
+        where: {
+          [Op.or]: [
+            {
+              student_id: id
+            },
+            {
+              teacher_id: id
+            }
+          ]
+        }
+      });
       res.send(allLessons);
-      // let { id } = req.params; //contingent upon passing
-      // let allLessons = await db.Lesson.findAll({
-      //   where: {
-      //     [Op.or]: [
-      //       {
-      //         student_id: id
-      //       },
-      //       {
-      //         teacher_id: id
-      //       }
-      //     ]
-      //   }
-      // });
-      // res.send(allLessons);
     } catch (error) {
       console.log('Error with fetchAllLessons', error);
       return;
