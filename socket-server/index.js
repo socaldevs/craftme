@@ -16,11 +16,11 @@ const PORT = process.env.SOCKET_PORT;
 const app = express();
 const server = app.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
 const io = socket(server); // io is server upgraded w/ web socket connection
-const ExpressPeerServer = require('peer').ExpressPeerServer;
+//const ExpressPeerServer = require('peer').ExpressPeerServer;
 
 const options = {
-  debug: true
-}
+  debug: true,
+};
 
 const middleware = [
   helmet(),  
@@ -34,7 +34,7 @@ const middleware = [
 
 io.on('connection', (socket) => { 
   console.log('made SOCKET connection!', socket.id);
-  
+
   socket.on('room', (room) => {
     socket.join(room);
     io.sockets.in(room).emit('confirmation', `Someone has joined room ${room}`);
@@ -52,24 +52,21 @@ io.on('connection', (socket) => {
   socket.on('typing', (data) => {
     socket.broadcast.to(data.room).emit('typing', data.feedback);
   });
-  socket.on('getOtherPeerId', (data) => {
-    socket.broadcast.to(data).emit('getOtherPeerId', 'test');
+  // socket.on('getOtherPeerId', (data) => {
+  //   socket.broadcast.to(data).emit('getOtherPeerId', 'test');
+  // });
+  // socket.on('fetchedPeerId', (data) => {
+  //   socket.broadcast.to(data.room).emit('fetchedPeerId', data.peerId);
+  // });
+  socket.on('offer', (data) => {
+    socket.broadcast.to(data.room).emit('offer', data.offer);
   });
-  socket.on('fetchedPeerId', (data) => {
-    socket.broadcast.to(data.room).emit('fetchedPeerId', data.peerId);
+  socket.on('answer', (data) => {
+    io.sockets.in(data.room).emit('answer', data.answer);
   });
 });
 
-server.on('connection', (id) => console.log('made PEER connection!'));
-
+// server.on('connection', (id) => console.log('made PEER connection!'));
 app.use(...middleware);
-app.use('/api', ExpressPeerServer(server, options));
+// app.use('/api', ExpressPeerServer(server, options));
 app.use(router);
-
-
-
-
-
-
-
-
