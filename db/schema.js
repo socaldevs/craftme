@@ -29,7 +29,7 @@ const User = sequelize.define('user', {
   bio: Sequelize.STRING,
   profile_pic_url: Sequelize.STRING,
   // crafts: Sequelize.ARRAY(Sequelize.STRING),
-  rating: Sequelize.INTEGER
+  rating: Sequelize.FLOAT,
 });
 
 const Conversation = sequelize.define('conversation', {

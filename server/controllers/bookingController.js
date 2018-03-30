@@ -30,10 +30,7 @@ const submitBooking = async (req, res) => {
 };
 
 const getAllBookingsForUser = async (req, res) => {
-  console.log('req.params is================>', req.params);
   let { id } = req.params;
-  // userId = JSON.parse(req.query.userId);
-  
   try {
     const bookings = await db.Booking.findAll( {where: {
       [Op.or]: [
