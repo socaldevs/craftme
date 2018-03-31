@@ -32,6 +32,7 @@ module.exports = {
         chat_id: id,
         notes,
       });
+      //SWITCH: COMMENT THIS LINE IF YOU WANT TO NOT DESTROY THE LESSON UPON SAVE
       await removeBooking({
         body: { roomId },
       });
