@@ -71,21 +71,4 @@ module.exports = {
     //possible MVP+
   },
 
-  // fetchAllTeachersForCraft: async (req, res) => {
-  //   try {
-  //     let { craft } = req.params;
-  //     let teachers = await db.User.findAll({
-  //       where: {
-  //         crafts: {
-  //           [Op.contains]: [craft]
-  //         },
-  //         [Op.and]: [{ type: 2 }]
-  //       }
-  //     });
-  //     res.send(teachers);
-  //   } catch (error) {
-  //     console.log(error);
-  //     return;
-  //   }
-  // }
 };
