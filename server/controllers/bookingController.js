@@ -25,6 +25,7 @@ const submitBooking = async (req, res) => {
     res.send(booking);
   } catch (error) {
     console.log('Error at submitBooking', error);
+    res.status(500).send(error);
     return;
   }
 };

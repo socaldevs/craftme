@@ -92,10 +92,10 @@ module.exports = {
         },
         include: [{
             model: db.User,
-            // as: 'userId'  
+            attributes: ['id','bio', 'username', 'profile_pic_url','rating'],    
           }]  
       });
-       res.status(200).send(teachers);
+      res.status(200).send(teachers);
     } catch (error) {
       console.log('Error with getCraftTeachers', error);
       return;
