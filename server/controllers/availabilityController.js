@@ -52,7 +52,7 @@ const removeAvailability = async (req, res) => {
     // const availabilityToRemove = await db.Availability.findOne({ id: selected_availability_id });
     // availabilityToRemove.destroy();
     // incase we want to use removeAvailability as a helper function
-    if(method === 'delete'){
+    if (method === 'delete') {
       res.status(202).send(availabilityToRemove);
     } else {
       return availabilityToRemove;

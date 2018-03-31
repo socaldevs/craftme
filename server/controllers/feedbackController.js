@@ -21,13 +21,11 @@ module.exports = {
   calculateAverageRatingForTeacher: async (req, res) => {
     try {
       let avg = 0;
-      const { teacher_id } = req.params;
+      const { teacher_id } = req.body;
       //fetches all ratings for a teacher
       const feedbacks = await db.Feedback.findAll({
-        where: {
-          teacher_id: teacher_id
-        }
-      })
+        where: { teacher_id },
+      });
       for (let i = 0; i < feedbacks.length; i++) {
         avg += feedbacks[i].rating;
       }

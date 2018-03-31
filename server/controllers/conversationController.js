@@ -20,8 +20,8 @@ module.exports = {
   },
   fetchAllConversationsById: async (req, res) => {
     try {
-      let { id } = req.params;
-      let conversations = await db.Conversation.findAll({
+      const { id } = req.params;
+      const conversations = await db.Conversation.findAll({
         where: {
           [Op.or]: [
             {
@@ -49,12 +49,12 @@ module.exports = {
   },
   fetchAllMessagesByConversationId: async (req, res) => {
     try {
-      let { id } = req.params;
-      let messages = await db.Message.findAll({
+      const { id } = req.params;
+      const messages = await db.Message.findAll({
         where: {
           conversation_id: id
         },
-        raw: true
+        raw: true,
       });
       for (let i = 0; i < messages.length; i++) {
         messages[i].sender = await userController.fetchUsernameById(

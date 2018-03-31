@@ -6,9 +6,9 @@ const { languageTranslator } = require('../languageTranslator.js');
 module.exports = {
   fetchUserInfo: async (req, res) => {
     try {
-      let id = req.params.id;
-      let userInfo = await db.User.findOne({
-        where: { id: id }
+      const { id } = req.params;
+      const userInfo = await db.User.findOne({
+        where: { id },
       });
       res.send(userInfo);
     } catch (error) {
@@ -20,15 +20,15 @@ module.exports = {
   addTeacherOrStudent: async (req, res) => {
     try {
       //add ---->       crafts, rating
-      let { username, type, bio, profile_pic, crafts, rating} = req.body;
+      const { username, type, bio, profile_pic, crafts, rating} = req.body;
       //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
-      let newUser = await db.User.create({
-        username: username,
-        type: type,
-        bio: bio,
+      const newUser = await db.User.create({
+        username,
+        type,
+        bio,
+        crafts,
+        rating,
         profile_pic_url: profile_pic,
-        crafts: crafts,
-        rating: rating
       });
       //TODO don't need res.send data...only for testing purposes
       res.send(newUser);
@@ -40,12 +40,12 @@ module.exports = {
 
   updateUserInfo: async (req, res) => {
     try {
-      let { id, profile_pic_url, crafts, bio } = req.body;
-      let user = await db.User.findOne({ where: { id: id } });
+      const { id, profile_pic_url, crafts, bio } = req.body;
+      const user = await db.User.findOne({ where: { id } });
       user.update({
-        profile_pic_url: profile_pic_url,
-        crafts: crafts,
-        bio: bio
+        profile_pic_url,
+        crafts,
+        bio,
       });
       res.send(user);
     } catch (error) {
@@ -54,9 +54,11 @@ module.exports = {
     }
   },
 
-  fetchUsernameById: async id => {
+  fetchUsernameById: async (id) => {
     try {
-      let username = await db.User.findOne({ where: { id: id } });
+      const username = await db.User.findOne({ 
+        where: { id },
+      });
       return username.username;
     } catch (error) {
       console.log('Error with fetchUsernameById', error);

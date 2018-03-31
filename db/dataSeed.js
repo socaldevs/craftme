@@ -35,77 +35,47 @@ for (let i = 0; i < 3; i++) {
 }
 const bookings = [
   {
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 1,
     student_id: 2,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'Hiking lesson with Jessica Alba',
     start: new Date(2018, 2, 21, 13, 30, 0),
     end: new Date(2018, 2, 21, 14, 0, 0),
   },
 
   { 
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 1,
     student_id: 3,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'Karate',
     start: new Date(2018, 2, 21, 10, 30, 0),
     end: new Date(2018, 2, 21, 12, 0, 0),
   },
   { 
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 1,
     student_id: 4,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'Kung-Fo',
     start: new Date(2018, 2, 21, 9, 0, 0),
     end: new Date(2018, 2, 21, 9, 30, 0),
   },
 
   { 
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 3,
     student_id: 5,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'Cooking',
     start: new Date(2018, 2, 20, 0, 0, 0),
     end: new Date(2018, 2, 21, 0, 0, 0),
   },
 
   { 
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 2,
     student_id: 6,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'Yoga lesson with Megan Fox',
     start: new Date(2018, 2, 23, 9, 30, 0),
     end: new Date(2018, 2, 23, 11, 30, 0),
   },
 
   { 
-<<<<<<< HEAD
-    teacher_id: 11,
-    student_id: 22,
-=======
     teacher_id: 3,
     student_id: 7,
->>>>>>> [Controllers] - Updates teacher rating (feedback controller)
     title: 'DTS STARTS',
     start: new Date(2018, 2, 24, 1, 0, 0),
     end: new Date(2018, 2, 24, 4, 0, 0),

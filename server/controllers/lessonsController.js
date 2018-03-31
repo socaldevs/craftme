@@ -22,14 +22,14 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let { teacher_id, student_id, notes, messages } = req.body;
-      let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
-      let id = saved.data._id;
-      let lesson = await db.Lesson.create({
-        teacher_id: teacher_id,
-        student_id: student_id,
+      const { teacher_id, student_id, notes, messages } = req.body;
+      const saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
+      const id = saved.data._id;
+      const lesson = await db.Lesson.create({
+        teacher_id,
+        student_id,
         chat_id: id,
-        notes: notes
+        notes,
       });
       res.send(lesson);
     } catch (error) {

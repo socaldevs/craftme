@@ -71,7 +71,7 @@ router.route('/languages').get(userController.getLanguageList);
 router.route('/getAllBookingsForUser/:id').get(bookingController.getAllBookingsForUser);
 
 //get all ratings for a specific teacher
-router.route('/calculateAverageRatingForTeacher/:teacher_id').get(feedbackController.calculateAverageRatingForTeacher);
+router.route('/calculateAverageRatingForTeacher/').put(feedbackController.calculateAverageRatingForTeacher);
 
 //get all feedbacks for a specific lesson
 // router.route('/fetchFeedbackForLesson/:lesson_id').get(feedbackController.fetchFeedbackForLesson);
