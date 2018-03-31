@@ -74,6 +74,9 @@ router.route('/getAllBookingsForUser/:id').get(bookingController.getAllBookingsF
 router.route('/calculateAverageRatingForTeacher/:teacher_id').get(feedbackController.calculateAverageRatingForTeacher);
 
 //get all feedbacks for a specific lesson
-router.route('/fetchFeedbackForLesson/:lesson_id').get(feedbackController.fetchFeedbackForLesson);
+// router.route('/fetchFeedbackForLesson/:lesson_id').get(feedbackController.fetchFeedbackForLesson);
+
+//TEST path
+// router.route('/calculateAverageRatingForAllTeachers').get(feedbackController.calculateAverageRatingForAllTeachers);
 
 module.exports = router;

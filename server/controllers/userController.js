@@ -129,5 +129,20 @@ module.exports = {
           res.send(JSON.stringify(response.languages, null, 2));
       }
     );
-  }
+  },
+
+  // getAllTeachers: async () => {
+  //   try {
+  //     const teachers = await db.User.findAll({
+  //       where: {
+  //         type: 0
+  //       }
+  //     })
+  //     return teachers;
+  //   } catch (error) {
+  //     console.log('Error with getAllTeachers', error);
+  //     return;
+  //   }
+  // },
+  
 };

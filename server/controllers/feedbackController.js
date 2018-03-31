@@ -9,7 +9,7 @@ module.exports = {
         student_id: student_id,
         lesson_id: lesson_id,
         rating: rating,
-        review: review
+        review: review,
       });
       res.send(feedback);
     } catch (error) {
@@ -49,19 +49,38 @@ module.exports = {
     }
   },
 
-  fetchFeedbackForLesson: async (req, res) => {
+  // fetchFeedbackForLesson: async (req, res) => {
+  //   try {
+  //     const { lesson_id } = req.params;
+  //     const feedback = await db.Feedback.findOne({
+  //       where: {
+  //         lesson_id
+  //       }
+  //     })
+  //     res.send(feedback);
+  //   } catch (error) {
+  //     console.log('Error with fetchFeedbackForLesson', error);
+  //     return;
+  //   }
+  // },
+
+  getAllFeedbacksForTeacher: async (id) => {
     try {
-      const { lesson_id } = req.params;
-      const feedback = await db.Feedback.findOne({
+      let avg = 0;
+      const feedbacks = await db.Feedback.findAll({
         where: {
-          lesson_id
-        }
-      })
-      res.send(feedback);
+          teacher_id: id,
+        },
+      });
+      for (let i = 0; i < feedbacks.length; i++) {
+        avg += feedbacks[i].rating;
+      }
+      return (avg / feedbacks.length);
     } catch (error) {
-      console.log('Error with fetchFeedbackForLesson', error);
+      console.log('Error with getAllFeedbacksForTeacher', error);
       return;
     }
-  }
-};
+  },
+
+}
 
