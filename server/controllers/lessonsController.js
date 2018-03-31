@@ -23,7 +23,7 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      const { teacher_id, student_id, notes, messages, roomId } = req.body;
+      const { teacher_id, student_id, notes, messages, roomId, title } = req.body;
       const saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
       const id = saved.data._id;
       const lesson = await db.Lesson.create({
@@ -31,6 +31,7 @@ module.exports = {
         student_id,
         chat_id: id,
         notes,
+        title,
       });
       //SWITCH: COMMENT THIS LINE IF YOU WANT TO NOT DESTROY THE LESSON UPON SAVE
       await removeBooking({
