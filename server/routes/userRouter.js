@@ -69,4 +69,14 @@ router.route('/languages').get(userController.getLanguageList);
 
 // router.route('/getAllBookingsForUser/:userId').get(bookingController.getAllBookingsForUser);
 router.route('/getAllBookingsForUser/:id').get(bookingController.getAllBookingsForUser);
+
+//get all ratings for a specific teacher
+router.route('/calculateAverageRatingForTeacher/').put(feedbackController.calculateAverageRatingForTeacher);
+
+//get all feedbacks for a specific lesson
+// router.route('/fetchFeedbackForLesson/:lesson_id').get(feedbackController.fetchFeedbackForLesson);
+
+//TEST path
+// router.route('/calculateAverageRatingForAllTeachers').get(feedbackController.calculateAverageRatingForAllTeachers);
+
 module.exports = router;
