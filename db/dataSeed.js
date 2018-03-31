@@ -35,7 +35,7 @@ for (let i = 0; i < 3; i++) {
 }
 const bookings = [
   {
-    teacher_id: 1,
+    teacher_id: 11,
     student_id: 22,
     title: 'Hiking lesson with Jessica Alba',
     start: new Date(2018, 2, 21, 13, 30, 0),
@@ -43,22 +43,22 @@ const bookings = [
   },
 
   { 
-    teacher_id: 1,
+    teacher_id: 11,
     student_id: 22,
     title: 'Karate',
     start: new Date(2018, 2, 21, 10, 30, 0),
     end: new Date(2018, 2, 21, 12, 0, 0),
   },
   { 
-    teacher_id: 1,
-    student_id: 6,
+    teacher_id: 11,
+    student_id: 22,
     title: 'Kung-Fo',
     start: new Date(2018, 2, 21, 9, 0, 0),
     end: new Date(2018, 2, 21, 9, 30, 0),
   },
 
   { 
-    teacher_id: 3,
+    teacher_id: 11,
     student_id: 22,
     title: 'Cooking',
     start: new Date(2018, 2, 20, 0, 0, 0),
@@ -66,7 +66,7 @@ const bookings = [
   },
 
   { 
-    teacher_id: 2,
+    teacher_id: 11,
     student_id: 22,
     title: 'Yoga lesson with Megan Fox',
     start: new Date(2018, 2, 23, 9, 30, 0),
@@ -74,7 +74,7 @@ const bookings = [
   },
 
   { 
-    teacher_id: 3,
+    teacher_id: 11,
     student_id: 22,
     title: 'DTS STARTS',
     start: new Date(2018, 2, 24, 1, 0, 0),
