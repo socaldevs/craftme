@@ -49,8 +49,28 @@ const getAllBookingsForUser = async (req, res) => {
 
 };
 
+const removeBooking = async (req, res) => {
+  try {
+    const { roomId } = req.body;
+    const { method } = req;
+    const bookingToRemove = await db.Booking.destroy({
+      where: {
+        id: roomId,
+      }
+    });
+    if (method === 'delete') {
+      res.status(202).send(bookingToRemove);
+    } else {
+      return bookingToRemove;
+    }
+  } catch (error) {
+    console.log('Error with removeBooking', error);
+    return;
+  }
+}
 
-module.exports = { submitBooking , getAllBookingsForUser};
+
+module.exports = { submitBooking , getAllBookingsForUser, removeBooking};
 
 //TODO: determine if these functions are needed
 

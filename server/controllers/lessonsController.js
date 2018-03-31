@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const axios = require('axios');
 const path = require('path');
+const { removeBooking } = require('./bookingController.js');
 const env = require('dotenv');
 const ENV = path.resolve(__dirname, '../../.env');
 env.config({path: ENV});
@@ -22,7 +23,7 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      const { teacher_id, student_id, notes, messages } = req.body;
+      const { teacher_id, student_id, notes, messages, roomId } = req.body;
       const saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
       const id = saved.data._id;
       const lesson = await db.Lesson.create({
@@ -31,7 +32,10 @@ module.exports = {
         chat_id: id,
         notes,
       });
-      res.send(lesson);
+      await removeBooking({
+        body: { roomId },
+      });
+      res.status(202).send(lesson);
     } catch (error) {
       console.log('Error with saveLesson', error);
       return;
@@ -40,7 +44,7 @@ module.exports = {
 
   fetchAllLessons: async (req, res) => {
     try {
-      let { id } = req.params; //contingent upon passing
+      let { id } = req.params; 
       let allLessons = await db.Lesson.findAll({
         where: {
           [Op.or]: [
