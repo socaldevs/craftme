@@ -18,12 +18,12 @@ module.exports = {
   sendMessage: async (req, res) => {
     try {
       let message, result;
-      let { recipient_id, sender_id, text } = req.body;
-      let verify = conversationController.verifyConversationExists(
+      const { recipient_id, sender_id, text } = req.body;
+      const verify = conversationController.verifyConversationExists(
         sender_id,
-        recipient_id
+        recipient_id,
       );
-      let exists = await sequelize.query(verify);
+      const exists = await sequelize.query(verify);
       if (exists[0].length > 0) {
         message = await db.Message.create({
           recipient_id: recipient_id,
@@ -32,15 +32,15 @@ module.exports = {
           conversation_id: exists[0][0].id
         });
       } else {
-        let query = await conversationController.createConversation(
+        const query = await conversationController.createConversation(
           sender_id,
-          recipient_id
+          recipient_id,
         );
-        let id = await sequelize.query(query);
+        const id = await sequelize.query(query);
         message = await db.Message.create({
-          recipient_id: recipient_id,
-          sender_id: sender_id,
-          text: text,
+          recipient_id,
+          sender_id,
+          text,
           conversation_id: id[0][0].id
         });
       }

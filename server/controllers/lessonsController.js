@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const axios = require('axios');
 const path = require('path');
+const { removeBooking } = require('./bookingController.js');
 const env = require('dotenv');
 const ENV = path.resolve(__dirname, '../../.env');
 env.config({path: ENV});
@@ -22,17 +23,21 @@ module.exports = {
 
   saveLesson: async (req, res) => {
     try {
-      let { teacher_id, student_id, notes, messages } = req.body;
-      let saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
-      let id = saved.data._id;
-      let lesson = await db.Lesson.create({
+      const { teacher_id, student_id, notes, messages, roomId, title } = req.body;
+      const saved = await axios.post(`${process.env.SOCKET_PATH}/chat/save`, messages);
+      const id = saved.data._id;
+      const lesson = await db.Lesson.create({
         teacher_id,
         student_id,
         chat_id: id,
         notes,
-        title
+        title,
       });
-      res.send(lesson);
+      //SWITCH: COMMENT THIS LINE IF YOU WANT TO NOT DESTROY THE LESSON UPON SAVE
+      await removeBooking({
+        body: { roomId },
+      });
+      res.status(202).send(lesson);
     } catch (error) {
       console.log('Error with saveLesson', error);
       return;
@@ -41,7 +46,7 @@ module.exports = {
 
   fetchAllLessons: async (req, res) => {
     try {
-      let { id } = req.params; //contingent upon passing
+      let { id } = req.params; 
       let allLessons = await db.Lesson.findAll({
         where: {
           [Op.or]: [
