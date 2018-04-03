@@ -7,16 +7,33 @@ const { router } = require('./routes');
 const mongoDB = require('./db/mongoDB');
 //const redis = require('./db/redis');
 const path = require('path');
+const fs = require('fs');
 const env = require('dotenv');
 const ENV = path.resolve(__dirname, '../.env');
 env.config({path: ENV});
 console.log("socket server path: ",ENV)
 
 const PORT = process.env.SOCKET_PORT;
+
+/* CHANGE AWS HERE */
+
 const app = express();
 const server = app.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
 const io = socket(server); // io is server upgraded w/ web socket connection
-//const ExpressPeerServer = require('peer').ExpressPeerServer;
+
+/* 
+const app = express();
+const privateKey = fs.readFileSync(path.resolve(__dirname, '../../../../etc/nginx/ssl/private/craftme.key'), 'utf8');
+const certificate = fs.readFileSync(path.resolve(__dirname, '../../../../etc/nginx/ssl/certs/ssl-bundle.crt'), 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const server = require('https').createServer(credentials, app);
+
+const passed = server.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
+const io = socket(passed); // io is server upgraded w/ web socket connection
+ */
+
+ //const ExpressPeerServer = require('peer').ExpressPeerServer;
+
 
 const options = {
   debug: true,
