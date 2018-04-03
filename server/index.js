@@ -41,8 +41,8 @@ app.use(morgan('short'));
 app.use(
   cors({
     allowedHeaders: 'Content-Type, authorization',
-    methods: ['GET, POST, PUT, DELETE', 'OPTIONS']
-  })
+    methods: ['GET, POST, PUT, DELETE', 'OPTIONS'],
+  }),
 );
 
 

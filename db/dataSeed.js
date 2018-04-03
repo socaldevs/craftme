@@ -180,13 +180,13 @@ const createMany = async (entries, modelName) => {
 
 const insertAllSeedData = async () => {
   await createMany(teachers, 'User');
-  await createMany(students, 'User'); 
+  await createMany(students, 'User');
   await createMany(bookings, 'Booking');
   await createMany(crafts, 'Craft');
   await createMany(craftTeachers, 'CraftTeacher');
   await createMany(availability, 'Availability');
   await createMany(lessons, 'Lesson');
-  process.exit();  
+  process.exit();
 };
 
 insertAllSeedData();
