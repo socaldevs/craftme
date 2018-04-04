@@ -49,7 +49,23 @@ module.exports = {
       console.log('Error with sendMessage', error);
       return;
     }
-  }
+  },
+
+  getConversationId: async (req, res) => {
+    try {
+      const { user_id, sender_id } = req.params;
+      const convo = await conversationController.verifyConversationExists(
+        sender_id,
+        user_id,
+      )
+      const id = await sequelize.query(convo);
+      res.send(id[0]);
+    } catch (error) {
+      console.log('Error with get getConversationId', error);
+      return;
+    }
+  },
+
 };
 
 // TODO: REMOVE IF UNNECESSARY, OLD FETCHALLMESSAGES

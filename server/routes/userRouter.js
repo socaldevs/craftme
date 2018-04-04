@@ -73,6 +73,9 @@ router.route('/getAllBookingsForUser/:id').get(bookingController.getAllBookingsF
 //get all ratings for a specific teacher
 router.route('/calculateAverageRatingForTeacher/').put(feedbackController.calculateAverageRatingForTeacher);
 
+//get conversationid given userid and senderid
+router.route('/getConversationId/:user_id/:sender_id').get(messageController.getConversationId);
+
 //get all feedbacks for a specific lesson
 // router.route('/fetchFeedbackForLesson/:lesson_id').get(feedbackController.fetchFeedbackForLesson);
 

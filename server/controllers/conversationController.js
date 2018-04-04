@@ -11,6 +11,7 @@ module.exports = {
       RETURNING id
       `;
   },
+  
   verifyConversationExists: (sender_id, recipient_id) => {
     return `
       SELECT id, user_id, recipient_id FROM conversations 
@@ -18,6 +19,7 @@ module.exports = {
       OR (user_id = ${recipient_id} AND recipient_id = ${sender_id})
     `;
   },
+
   fetchAllConversationsById: async (req, res) => {
     try {
       const { id } = req.params;
@@ -47,6 +49,7 @@ module.exports = {
       console.log('Error with fetchAllConversationsById', error);
     }
   },
+  
   fetchAllMessagesByConversationId: async (req, res) => {
     try {
       const { id } = req.params;
@@ -68,5 +71,6 @@ module.exports = {
     } catch (error) {
       console.log('Error with fetchAllMessagesByConversation,', error);
     }
-  }
+  },
+
 };
