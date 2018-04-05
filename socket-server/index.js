@@ -18,7 +18,6 @@ const PORT = process.env.SOCKET_PORT;
 
 const app = express();
 const server = app.listen(PORT, console.log(`SOCKET server Listening to PORT ${PORT}!`));
-<<<<<<< HEAD
 const io = socket(server); // io is server upgraded w/ web socket connection
 
 /* 
@@ -34,9 +33,6 @@ const io = socket(passed); // io is server upgraded w/ web socket connection
 
  //const ExpressPeerServer = require('peer').ExpressPeerServer;
 
-=======
-const io = socket(server);
->>>>>>> [submitCrafts] controller
 
 const options = {
   debug: true,

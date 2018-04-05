@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-db": "node ./db/tableCreator.js",
     "seed-data": "node ./db/dataSeed.js",
-    "start": "nodemon ./server/",
-    "socket": "nodemon ./socket-server/"
+    "server-dev": "nodemon ./server/",
+    "socket": "nodemon ./socket-server/",
+    "start": "npm-run-all -p server-dev socket"
   },
   "repository": {
     "type": "git",
@@ -57,6 +58,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.7.0",
+    "npm-run-all": "^4.1.2"
   }
 }
