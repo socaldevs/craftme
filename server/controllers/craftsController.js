@@ -14,6 +14,7 @@ const submitCraft = async (req, res) => {
     res.send(association);
   } catch (err) {
     console.log('err from submitCrafts', err);
+    return;
   }
 };
 
