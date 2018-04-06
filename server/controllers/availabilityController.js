@@ -1,4 +1,7 @@
 const db = require('../../db/schema.js');
+const sequelize = require('../../db/index.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const retrieveTeacherAvailability = async (req, res) => {
   try {
@@ -63,4 +66,18 @@ const removeAvailability = async (req, res) => {
   }
 }
 
-module.exports = { retrieveTeacherAvailability, submitAvailability, removeAvailability };
+const removeOldAvailabilities = async () => {
+  try {
+    const oldAvailabilities = await db.Availability.findOne({
+      where: {
+        end: { [Op.lt] : new Date() },
+      }
+    })
+    return oldAvailabilities;
+  } catch (error) {
+    console.log('Error with removeOldAvailabilities ', error);
+    return;
+  }
+}
+
+module.exports = { retrieveTeacherAvailability, submitAvailability, removeAvailability, removeOldAvailabilities };

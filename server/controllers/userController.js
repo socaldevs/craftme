@@ -40,14 +40,12 @@ module.exports = {
 
   updateUserInfo: async (req, res) => {
     try {
-      const { id, profile_pic_url, crafts, bio } = req.body;
-      const user = await db.User.findOne({ where: { id } });
-      user.update({
-        profile_pic_url,
-        crafts,
-        bio,
+      const { id, profile_pic_url, bio } = req.body;
+      let user = await db.User.findOne({ where: { id } });
+      const updatedUser = await user.update({
+        bio: bio,
       });
-      res.send(user);
+      res.send(updatedUser);
     } catch (error) {
       console.log('Error with updateUserInfo', error);
       return;
